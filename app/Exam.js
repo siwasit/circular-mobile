@@ -1,69 +1,91 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, StatusBar } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
 
 const Exam = () => {
   const [btnPosition, setBtnPosition] = useState('Chosen');
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const leftClick = () => {
-    setBtnPosition(0);
-  }
+  const toggleOption = (option) => {
+    setBtnPosition(option);
+  };
 
-  const rightClick = () => {
-    setBtnPosition(135);
-  }
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.enrollContainer}>
-          <View style={styles.enrollDiv}>
-            <Text style={styles.enrollText}>Exam</Text>
-          </View>
-          <View style={styles.detailDiv}>
-            <Text style={styles.detailText}>ตารางสอบ🔥</Text>
-          </View>
-          <View style={styles.profileGrid}>
-            <Image source={{ uri: '<path-to-image>' }} style={styles.profileImage} />
-            <View style={styles.profileInfo}>
-              <Text style={styles.profileText}>6510742072</Text>
-              <Text style={styles.profileTextName}>Nutpraphut Praphutsirikul</Text>
-            </View>
-          </View>
-          <View style={styles.lastModifyDiv}>
-            <Text style={styles.lastModifyText}>อัพเดทล่าสุด: ปปปป/ดด/วว ชช:นน</Text>
-          </View>
-          <View style={styles.selectContainer}>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={() => toggleOption('Chosen')} style={[styles.toggleBtn, btnPosition === 'Chosen' ? styles.selectedBtn : null]}>
-                <Text style={btnPosition === 'Chosen' ? styles.selectedText : null}>Chosen Schedule</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => toggleOption('Drawn')} style={[styles.toggleBtn, btnPosition === 'Drawn' ? styles.selectedBtn : null]}>
-                <Text style={btnPosition === 'Drawn' ? styles.selectedText : null}>Drawn Schedule</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.calendarPic}>
-            <Image source={require('./img/calendar.png')} style={styles.calendarImage} />
-          </View>
-          <View style={styles.dayDiv}>
-            <Text style={styles.dayText}>25 Sunday</Text>
-          </View>
-          <View style={styles.classContainer}>
-            <View style={styles.gridRow}>
-              <View style={styles.timeContainer}>
-                <Text style={styles.timeStartText}>12:00</Text>
-                <Text style={styles.timeFinishText}>14:00</Text>
-              </View>
-              <View style={styles.borderLine}></View>
-              <View style={styles.classDetail}>
-                <Text style={styles.classTextName}>SF222 (760001)</Text>
-                <Text style={styles.classTextSubject}>Software Engineering Models and Analysis</Text>
-                <Text style={styles.classTextRoom}>Room not specified</Text>
-              </View>
-            </View>
-          </View>
+          <TouchableOpacity onPress={openModal}>
+            <Text style={styles.openButton}>Open Modal</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
+
+      <Modal visible={modalVisible} transparent animationType="fade">
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
+              <View style={styles.enrollContainer}>
+                <View style={styles.enrollDiv}>
+                  <Text style={styles.enrollText}>Exam</Text>
+                </View>
+                <View style={styles.detailDiv}>
+                  <Text style={styles.detailText}>ตารางสอบ🔥</Text>
+                </View>
+                <View style={styles.profileGrid}>
+                  <Image source={{ uri: '<path-to-image>' }} style={styles.profileImage} />
+                  <View style={styles.profileInfo}>
+                    <Text style={styles.profileText}>6510742072</Text>
+                    <Text style={styles.profileTextName}>Nutpraphut Praphutsirikul</Text>
+                  </View>
+                </View>
+                <View style={styles.lastModifyDiv}>
+                  <Text style={styles.lastModifyText}>อัพเดทล่าสุด: ปปปป/ดด/วว ชช:นน</Text>
+                </View>
+                <View style={styles.selectContainer}>
+                  <View style={styles.buttonContainer}>
+                    <TouchableOpacity onPress={() => toggleOption('Chosen')} style={[styles.toggleBtn, btnPosition === 'Chosen' ? styles.selectedBtn : null]}>
+                      <Text style={btnPosition === 'Chosen' ? styles.selectedText : null}>Chosen Schedule</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => toggleOption('Drawn')} style={[styles.toggleBtn, btnPosition === 'Drawn' ? styles.selectedBtn : null]}>
+                      <Text style={btnPosition === 'Drawn' ? styles.selectedText : null}>Drawn Schedule</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.calendarPic}>
+                  <Image source={require('./img/calendar.png')} style={styles.calendarImage} />
+                </View>
+                <View style={styles.dayDiv}>
+                  <Text style={styles.dayText}>25 Sunday</Text>
+                </View>
+                <View style={styles.classContainer}>
+                  <View style={styles.gridRow}>
+                    <View style={styles.timeContainer}>
+                      <Text style={styles.timeStartText}>12:00</Text>
+                      <Text style={styles.timeFinishText}>14:00</Text>
+                    </View>
+                    <View style={styles.borderLine}></View>
+                    <View style={styles.classDetail}>
+                      <Text style={styles.classTextName}>SF222 (760001)</Text>
+                      <Text style={styles.classTextSubject}>Software Engineering Models and Analysis</Text>
+                      <Text style={styles.classTextRoom}>Room not specified</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </ScrollView>
+            <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -75,18 +97,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#f0f0f0',
   },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'center',
+  openButton: {
     alignItems: 'center',
-    marginTop: StatusBar.currentHeight
-  },
-  enrollContainer: {
-    width: 364.533,
-    height: 692,
-    backgroundColor: '#ffffff',
-    borderRadius: 22,
-    marginTop: 10,
+    justifyContent: 'center',
+    backgroundColor: '#87c4ff',
+    borderRadius: 20,
+    marginTop: '50%',
+    padding: 10,
   },
   enrollDiv: {
     marginTop: '10%',
@@ -170,9 +187,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   calendarImage: {
-    width: 313,
+    width: 300,
     height: 200,
     marginTop: 10,
+    paddingTop: 10,
   },
   dayDiv: {
     marginLeft: 20,
@@ -233,6 +251,34 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins',
     marginTop: 15,
     fontSize: 12.5,
+  },
+
+  // Modal styles
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    height: 'auto',
+  },
+  modalContent: {
+    width: 365,
+    height: 800,
+    backgroundColor: '#ffffff',
+    borderRadius: 20,
+    margin: 5,
+    padding: 2,
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+  },
+  closeButtonText: {
+    fontSize: 15,
+    color: '#333',
   },
 });
 
