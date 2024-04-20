@@ -1,190 +1,188 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
 
 const Enroll = () => {
+    const [btnPosition, setBtnPosition] = useState('Chosen');
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const toggleOption = (option) => {
+        setBtnPosition(option);
+    };
+
+    const openModal = () => {
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+    };
+
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.enrollContainer}>
-                <View style={styles.enrollDiv}>
-                    <Text style={styles.enrollText}>Enroll</Text>
+        <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
+                <View style={styles.enrollContainer}>
+                    <TouchableOpacity onPress={openModal}>
+                        <Text style={styles.openButton}>Open Modal</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.detailDiv}>
-                    <Text style={styles.detailText}>ลงทะเบียน / เพิ่ม-ถอน</Text>
-                </View>
-                <View style={styles.profileGrid}>
-                    <Image source={require('./img/calendar.png')} style={styles.profileImg} />
-                    <View style={styles.flexColumn}>
-                        <View style={styles.p2}>
-                            <Text style={styles.h4}>6510742072</Text>
-                        </View>
-                        <View style={styles.p2}>
-                            <Text style={styles.h5}>Nutpraphut Praphutsirikul</Text>
-                        </View>
+            </ScrollView>
+
+            <Modal visible={modalVisible} transparent animationType="fade">
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <ScrollView contentContainerStyle={styles.scrollContainer}>
+                            <View style={styles.enrollContainer}>
+                                <View style={styles.enrollDiv}>
+                                    <Text style={styles.enrollText}>Enroll</Text>
+                                </View>
+                                <View style={styles.detailDiv}>
+                                    <Text style={styles.detailText}>ลงทะเบียนเพิ่ม / ถอน</Text>
+                                </View>
+                                <View style={styles.profileGrid}>
+                                    <Image source={{ uri: '<path-to-image>' }} style={styles.profileImage} />
+                                    <View style={styles.profileInfo}>
+                                        <Text style={styles.profileText}>6510742072</Text>
+                                        <Text style={styles.profileTextName}>Nutpraphut Praphutsirikul</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.lastModifyDiv}>
+                                    <Text style={styles.lastModifyText}>อัพเดทล่าสุด: ปปปป/ดด/วว ชช:นน</Text>
+                                </View>
+                                <View style={styles.selectContainer}>
+                                    <View style={styles.buttonContainer}>
+                                        <TouchableOpacity onPress={() => toggleOption('Chosen')} style={[styles.toggleBtn, btnPosition === 'Chosen' ? styles.selectedBtn : null]}>
+                                            <Text style={btnPosition === 'Chosen' ? styles.selectedText : null}>Chosen Schedule</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => toggleOption('Drawn')} style={[styles.toggleBtn, btnPosition === 'Drawn' ? styles.selectedBtn : null]}>
+                                            <Text style={btnPosition === 'Drawn' ? styles.selectedText : null}>Drawn Schedule</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                <View style={styles.planContainer}>
+                                    <View style={styles.planNumber}>
+                                        <Text style={styles.h3}>Plan 1</Text>
+                                    </View>
+                                    <View style={styles.credit}>
+                                        <Text style={styles.h5}>6 หน่วยกิต</Text>
+                                    </View>
+                                    <View style={styles.detail}>
+                                        <Text style={styles.p}>
+                                            <Text style={styles.strong}>FR208</Text> 3 หน่วยกิต (3 หน่วยกิต ลงทะเบียน)
+                                            {"\n"}
+                                            ภาษาฝรั่งเศสเพื่อการสื่อสาร 1
+                                        </Text>
+                                        <View style={styles.borderRow}></View>
+                                        <View style={styles.secondClass}>
+                                            <Text style={styles.p}>
+                                                <Text style={styles.strong}>LA235</Text> 3 หน่วยกิต (3 หน่วยกิต ลงทะเบียน)
+                                                {"\n"}
+                                                ภาษาฝรั่งเศสเพื่อการสื่อสาร 1
+                                            </Text>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                        </ScrollView>
+                        <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
+                            <Text style={styles.closeButtonText}>Close</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.lastModifyDiv}>
-                    <Text style={styles.lastModifyText}>อัพเดทล่าสุด: ปปปป/ดด/วว ชช:นน</Text>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <View style={styles.buttonBox}>
-                        <View style={styles.btn}></View>
-                        <Text style={styles.toggleBtn} onPress={() => leftClick()}>Chosen Schedule</Text>
-                        <Text style={styles.toggleBtn} onPress={() => rightClick()}>Drawn Schedule</Text>
-                    </View>
-                </View>
-                <View style={styles.planContainer}>
-                    <View style={styles.planNumber}>
-                        <Text style={styles.h3}>Plan 1</Text>
-                    </View>
-                    <View style={styles.credit}>
-                        <Text style={styles.h5}>6 หน่วยกิต</Text>
-                    </View>
-                    <View style={styles.detail}>
-                        <Text style={styles.p}>
-                            <Text style={styles.strong}>FR208</Text> 3 หน่วยกิต (3 หน่วยกิต ลงทะเบียน)
-                            {"\n"}
-                            ภาษาฝรั่งเศสเพื่อการสื่อสาร 1
-                        </Text>
-                        <View style={styles.borderRow}></View>
-                        <View style={styles.secondClass}>
-                            <Text style={styles.p}>
-                                <Text style={styles.strong}>LA235</Text> 3 หน่วยกิต (3 หน่วยกิต ลงทะเบียน)
-                                {"\n"}
-                                ภาษาฝรั่งเศสเพื่อการสื่อสาร 1
-                            </Text>
-                        </View>
-                    </View>
-                </View>
-            </View>
-        </ScrollView>
+            </Modal>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
-        height: '100%',
-        backgroundColor: '#ff861e',
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#f0f0f0',
     },
-    enrollContainer: {
-        width: 364.533,
-        height: 692,
-        backgroundColor: '#ffffff',
-        borderRadius: 22,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 0.5,
-        shadowRadius: 10,
-        marginTop: 10,
+    openButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#87c4ff',
+        borderRadius: 20,
+        marginTop: '50%',
+        padding: 10,
     },
     enrollDiv: {
-        marginLeft: 20,
+        marginTop: '10%',
+        alignItems: 'left',
     },
     enrollText: {
-        marginTop: '10%',
-        width: 100,
-        height: 30,
         color: '#C3002F',
-        textAlign: 'center',
-        textShadowColor: '#C0002F',
-        textShadowOffset: { width: 1, height: 1 },
-        fontFamily: 'Poppins',
         fontSize: 40,
         fontWeight: '800',
+        fontFamily: 'Poppins',
+        textAlign: 'left',
+        alignItems: 'left',
+        marginLeft: 20,
     },
-    
     detailDiv: {
-        textAlign: 'center',
-        fontFamily: 'Imprima',
+        alignItems: 'left',
+        transform: [{ translateX: -26.3 }],
+    },
+    detailText: {
         fontSize: 30,
-        fontWeight: '400',
-        lineHeight: 'normal',
-        transform: [{ translateX: "-8%" }],
+        fontFamily: 'Imprima',
+        marginLeft: 45,
     },
     profileGrid: {
         flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        width: '100%',
-        maxWidth: 960,
-        margin: '0 auto',
+        alignItems: 'center',
+        marginTop: 10,
         height: 55,
     },
-    profileImg: {
+    profileImage: {
         width: 48.335,
         height: 48.392,
         borderRadius: 48.392,
-        marginLeft: 45,
+        marginRight: 45,
+        marginLeft: 50,
+        backgroundColor: 'lightgrey',
     },
-    flexColumn: {
-        margin: '5px 90px 0 0',
+    profileInfo: {
+        flex: 1,
+    },
+    profileText: {
         fontFamily: 'Poppins',
-        transform: [{ translateY: "-31%" }],
-        alignItems: 'center',
-        height: 90,
-    },
-    p2: {
-        width: 83,
-        height: 19.45,
-        fontFamily: 'Imprima',
         fontSize: 16,
+        marginLeft: -25,
     },
-    h4: {
-        fontFamily: 'Imprima',
+    profileTextName: {
+        fontFamily: 'Poppins',
         fontSize: 16,
-    },
-    h5: {
-        transform: [{ translateY: "-40%" }],
+        marginTop: 5,
+        marginLeft: -25,
     },
     lastModifyDiv: {
         marginLeft: 20,
+        marginTop: 10,
     },
     lastModifyText: {
-        marginLeft: 20,
+        fontFamily: 'Poppins',
     },
     buttonContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        margin: '0 0 0 41px',
-        width: 'auto',
-        height: 26,
-        borderRadius: 20,
-        backgroundColor: '#f3f3f3',
+        marginTop: 20,
+        flexDirection: 'row',
     },
     buttonBox: {
-        width: 'auto',
-        margin: '10px auto',
         position: 'relative',
+        flexDirection: 'row',
         borderRadius: 20,
         backgroundColor: '#fff',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 'auto',
     },
     toggleBtn: {
-        padding: '6px 6.5px',
-        cursor: 'pointer',
-        backgroundColor: 'transparent',
-        borderWidth: 0,
-        position: 'relative',
-        textAlign: 'center',
-        width: 'auto',
-        display: 'inline-block',
-    },
-    btn: {
-        top: 3,
-        position: 'absolute',
-        width: 127,
-        height: 26,
+        paddingVertical: 6,
+        paddingHorizontal: 6.5,
+        marginRight: 5,
         backgroundColor: '#ffdfae',
         borderRadius: 20,
-        transition: '.5s',
-        padding: -20,
     },
     h3: {
         paddingTop: 20,
@@ -213,6 +211,33 @@ const styles = StyleSheet.create({
         width: 290,
         height: 2,
         backgroundColor: 'rgb(173, 172, 172)',
+    },
+
+    // Modal styles
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        height: '100%',
+    },
+    modalContent: {
+        width: 365,
+        height: 800,
+        backgroundColor: '#ffffff',
+        borderRadius: 20,
+        margin: 10,
+        padding: 10,
+        marginTop: 30,
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 20,
+        right: 20,
+    },
+    closeButtonText: {
+        fontSize: 15,
+        color: '#333',
     },
 });
 

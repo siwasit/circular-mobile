@@ -269,7 +269,6 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 2,
     marginTop: 10,
-    alignItems: 'center',
   },
   closeButton: {
     position: 'absolute',
