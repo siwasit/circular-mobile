@@ -10,11 +10,12 @@ import HomeCard from './app/HomeCard.js';
 import BookBooking from './app/BookBooking.js';
 import ComplainForm from './app/ComplainForm.js';
 import MentalHealth from './app/MentalHealth.js';
+import BodyHealth from './app/BodyHealth.js';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-   <MentalHealth />
+   <BodyHealth />
   );
 }
