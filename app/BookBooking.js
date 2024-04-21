@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     },
     recommendedContainer: {
         borderRadius: 20,
-        margin: 10,
+        margin: 15,
         backgroundColor: 'rgba(254, 186, 0, 1)',
         paddingBottom: 25,
         width: 'auto',

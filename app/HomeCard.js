@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, StatusBar, Image } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 
 const HomeCard = () => {
     return (

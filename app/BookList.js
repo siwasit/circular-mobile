@@ -5,22 +5,22 @@ const BookList = () => {
   const books = [
     {
       id: 1,
-      title: '時々ボソッとロシア語でデレる隣のアーリャさん',
+      title: 'คุณอาเรียโต๊ะข้างๆ พูดภาษารัสเซียหวานใส่ซะหัวใจจะวาย',
       author: 'SunSunSun',
       imageUrl: require('./img/books/tokidoki.png'),
     },
     {
-        id: 2,
-        title: "Omniscent Reader's Viewpoint (1)",
-        author: 'Sing Shong',
-        imageUrl: require('./img/books/reader.jpg'),
-      },
-      {
-        id: 3,
-        title: '極楽街',
-        author: 'Yuto Sano',
-        imageUrl: require('./img/books/gokurakugai.jpg'),
-      },
+      id: 2,
+      title: "มุมมองนักอ่านพระเจ้า",
+      author: 'Sing Shong',
+      imageUrl: require('./img/books/reader.jpg'),
+    },
+    {
+      id: 3,
+      title: '極楽街\nสุขาวดีสีเลือด',
+      author: 'Yuto Sano',
+      imageUrl: require('./img/books/gokurakugai.jpg'),
+    },
   ];
 
   return (
@@ -40,7 +40,7 @@ const BookList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 12,
+    marginTop: 13,
     marginBottom: 21,
   },
   title: {
@@ -57,16 +57,17 @@ const styles = StyleSheet.create({
     marginLeft: -30,
   },
   bookCard: {
-    width: '27%', 
-    height: '',
+    width: '27%',
+    height: 'auto',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
     marginBottom: 15,
+    padding: 10,
     alignItems: 'center',
-    shadowColor: '#000', 
-    shadowOpacity: 0.1, 
-    shadowRadius: 4, 
-    shadowOffset: { width: 0, height: 1 }, 
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 1 },
   },
   bookImage: {
     width: 150,
@@ -78,10 +79,12 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   bookTitle: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
     marginTop: 10,
     borderRadius: 10,
+    alignContent: 'center',
+    width: 'auto',
   },
   bookAuthor: {
     fontSize: 14,
