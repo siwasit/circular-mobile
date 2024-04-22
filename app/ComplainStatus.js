@@ -2,6 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const ComplainStatus = () => {
+    // const [btnPosition, setBtnPosition] = useState('Chosen');
+
+    // const toggleOption = (option) => {
+    //     setBtnPosition(option);
+    // };
+
     return (
         <View style={styles.container}>
             <View style={styles.block}></View>
@@ -31,7 +37,7 @@ const ComplainStatus = () => {
                 </View>
 
                 <View style={styles.card}>
-                    <Text style={styles.topic}>แอป giggy ไม่เสถียน</Text>
+                    <Text style={styles.topic}>แอป giggy ไม่เสถียร</Text>
                     <Text style={[styles.statusText, styles.succeed]}>ดำเนินการสำเร็จ</Text>
                 </View>
             </View>
@@ -73,6 +79,7 @@ const styles = StyleSheet.create({
     tab: {
         flex: 1,
         alignItems: 'center',
+        borderRadius: 50,
     },
     button: {
         width: 160,
@@ -93,7 +100,8 @@ const styles = StyleSheet.create({
         marginTop: 25,
         marginLeft: 25,
         marginRight: 25,
-        width: '100%',
+        width: '90%',
+        borderRadius: 50,
     },
     card: {
         marginBottom: 25,
@@ -107,12 +115,13 @@ const styles = StyleSheet.create({
     },
     statusText: {
         marginTop: 10,
+        position: 'relative',
         padding: 5,
-        borderRadius: 20,
         textAlign: 'center',
         fontSize: 13,
         fontFamily: 'Imprima',
         flexShrink: 0,
+        width: '50%',
     },
     inProcess: {
         backgroundColor: '#FDF1C5',

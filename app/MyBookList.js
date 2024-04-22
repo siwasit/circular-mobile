@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-const BookList = () => {
+const MyBookList = () => {
   const books = [
     {
       id: 1,
@@ -42,27 +42,21 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 13,
     marginBottom: 21,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    marginLeft: 14,
+    width: '100%',
+    height: 'auto',
   },
   bookContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
+    justifyContent: 'space-around',
     marginLeft: -30,
   },
   bookCard: {
-    width: '27.5%',
+    width: '52%',
     height: 'auto',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
     marginBottom: 15,
-    marginLeft: 10,
     padding: 10,
     alignItems: 'center',
     shadowColor: '#000',
@@ -94,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BookList;
+export default MyBookList;

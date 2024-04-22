@@ -88,9 +88,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFDFAE',
     },
     emergencyButton: {
-        marginTop: 100,
+        marginTop: 120,
         alignItems: 'center',
         justifyContent: 'center',
+        textAlign: 'center',
+        borderRadius: 50,
     },
     emergencyText: {
         marginTop: 28,

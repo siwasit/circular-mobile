@@ -59,25 +59,74 @@ const Enroll = () => {
                                     </View>
                                 </View>
                                 <View style={styles.planContainer}>
-                                    <View style={styles.planNumber}>
-                                        <Text style={styles.h3}>Plan 1</Text>
+                                    <View style={styles.card}>
+                                        <View style={styles.content}>
+                                            <Text style={styles.kit0}>Plan1</Text>
+                                            <Text style={styles.Font}>18 หน่วยกิต</Text>
+                                            <Text style={styles.Heart}>💛</Text>
+                                        </View>
+                                        <View style={styles.firstContentCard}>
+                                            <View style={styles.content1}>
+                                                <Text style={styles.kit1}>CN101</Text>
+                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
+                                            </View>
+                                            <Text style={styles.kit3}>Introduction to Computer Progamming 101</Text>
+                                        </View>
+                                        <View style={styles.contentCard}>
+                                            <View style={styles.content1}>
+                                                <Text style={styles.kit1}>JP171</Text>
+                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
+                                            </View>
+                                            <Text style={styles.kit3}>JAPANESE FOR BEGINNERS 1</Text>
+                                        </View>
+                                        <View style={styles.contentCard}>
+                                            <View style={styles.content1}>
+                                                <Text style={styles.kit1}>SF231</Text>
+                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
+                                            </View>
+                                            <Text style={styles.kit3}>DATA STRUTURES AND ALGORITHMS</Text>
+                                        </View>
+                                        <View style={styles.contentCard}>
+                                            <View style={styles.content1}>
+                                                <Text style={styles.kit1}>CN321</Text>
+                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
+                                            </View>
+                                            <Text style={styles.kit3}>DATA COMMUNICATION AND COMPUTER NETWORK 1</Text>
+                                        </View>
                                     </View>
-                                    <View style={styles.credit}>
-                                        <Text style={styles.h5}>6 หน่วยกิต</Text>
-                                    </View>
-                                    <View style={styles.detail}>
-                                        <Text style={styles.p}>
-                                            <Text style={styles.strong}>FR208</Text> 3 หน่วยกิต (3 หน่วยกิต ลงทะเบียน)
-                                            {"\n"}
-                                            ภาษาฝรั่งเศสเพื่อการสื่อสาร 1
-                                        </Text>
-                                        <View style={styles.borderRow}></View>
-                                        <View style={styles.secondClass}>
-                                            <Text style={styles.p}>
-                                                <Text style={styles.strong}>LA235</Text> 3 หน่วยกิต (3 หน่วยกิต ลงทะเบียน)
-                                                {"\n"}
-                                                ภาษาฝรั่งเศสเพื่อการสื่อสาร 1
-                                            </Text>
+                                    <View style={styles.card}>
+                                        <View style={styles.content}>
+                                            <Text style={styles.kit0}>Plan2</Text>
+                                            <Text style={styles.Font}>12 หน่วยกิต</Text>
+                                            <Text style={styles.Heart}>💛</Text>
+                                        </View>
+                                        <View style={styles.firstContentCard}>
+                                            <View style={styles.content1}>
+                                                <Text style={styles.kit1}>CN101</Text>
+                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
+                                            </View>
+                                            <Text style={styles.kit3}>Introduction to Computer Progamming 101</Text>
+                                        </View>
+                                        <View style={styles.contentCard}>
+                                            <View style={styles.content1}>
+                                                <Text style={styles.kit1}>JP171</Text>
+                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
+                                            </View>
+                                            <Text style={styles.kit3}>JAPANESE FOR BEGINNERS 1</Text>
+                                        </View>
+                                        <View style={styles.contentCard}>
+                                            <View style={styles.content1}>
+                                                <Text style={styles.kit1}>SF231</Text>
+                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
+                                            </View>
+                                            <Text style={styles.kit3}>DATA STRUTURES AND ALGORITHMS</Text>
+                                        </View>
+                                        <View style={styles.contentCard}>
+                                            <View style={styles.content1}>
+                                                <Text style={styles.kit1}>CN321</Text>
+                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
+                                            </View>
+                                            <Text style={styles.kit3}>DATA COMMUNICATION AND COMPUTER NETWORK 1</Text>
                                         </View>
                                     </View>
                                 </View>
@@ -184,34 +233,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffdfae',
         borderRadius: 20,
     },
-    h3: {
-        paddingTop: 20,
-        marginLeft: 10,
-        fontFamily: 'Poppins',
-        fontSize: 15,
-    },
-    h5: {
-        fontFamily: 'Poppins',
-        fontSize: 12,
-        width: '4.2rem',
-        height: '1.2rem',
-        backgroundColor: '#c9c9c9',
-        textAlign: 'center',
-        borderRadius: 10,
-    },
-    p: {
-        paddingTop: 20,
-        fontFamily: 'Poppins',
-        fontSize: 13,
-    },
-    strong: {
-        fontWeight: 'bold',
-    },
-    borderRow: {
-        width: 290,
-        height: 2,
-        backgroundColor: 'rgb(173, 172, 172)',
-    },
 
     // Modal styles
     modalContainer: {
@@ -238,6 +259,74 @@ const styles = StyleSheet.create({
     closeButtonText: {
         fontSize: 15,
         color: '#333',
+    },
+
+    //Card styles
+    planContainer: {
+        height: 'auto',
+        marginTop: 15,
+        alignItems: 'center',
+        marginLeft: -20,
+    },
+    card: {
+        marginBottom: 20,
+        marginLeft: 25,
+        paddingLeft: 5,
+        paddingTop: 15,
+        paddingBottom: 10,
+        backgroundColor: 'rgba(243, 243, 243, 1)',
+        height: 330,
+        borderRadius: 15,
+    },
+    Font: {
+        position: 'relative',
+        left: '490%',
+        paddingTop: 1.5,
+    },
+    Heart: {
+        position: 'relative',
+        left: '520%',
+        paddingTop: 3.5,
+    },
+    firstContentCard: {
+        marginTop: 35,
+    },
+    content: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginBottom: 5,
+    },
+    content1: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: 5,
+    },
+    kit0: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginLeft: 5,
+    },
+    kit1: {
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
+    kit2: {
+        marginLeft: 8,
+        fontSize: 13,
+        color: 'rgba(179, 178, 183, 1)',
+    },
+    kit3: {
+        fontSize: 13,
+        marginLeft: 5,
+    },
+    contentCard: {
+        paddingBottom: 2,
+        paddingTop: 5,
+        borderTopWidth: 1,
+        borderTopColor: 'rgba(179, 178, 183, 1)',
+        width: 320,
+        marginTop: 11,
     },
 });
 
