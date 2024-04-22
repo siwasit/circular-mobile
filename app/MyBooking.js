@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginLeft: 13,
         marginTop: StatusBar.currentHeight,
+        width: 'auto',
     },
     header: {
         backgroundColor: '#C3002F',

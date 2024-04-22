@@ -50,6 +50,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     marginLeft: -30,
+    display: 'grid',
+    width: 'auto',
   },
   bookCard: {
     width: '52%',

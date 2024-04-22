@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native'; 
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
 
 const ComplainForm = () => {
     const [btnPosition, setBtnPosition] = useState('Chosen');
@@ -34,7 +34,7 @@ const ComplainForm = () => {
 
                         <Text style={[styles.font, styles.main]}>Complain Form📑</Text>
                         <Text style={[styles.font, styles.mini]}>ฟอร์มรับเรื่องร้องเรียน</Text>
-    
+
                         <View style={styles.tabMenu}>
                             <TouchableOpacity style={styles.buttonContainer}>
                                 <Text style={[styles.font, styles.complainForm]}>ฟอร์มรับเรื่อง</Text>
@@ -43,7 +43,7 @@ const ComplainForm = () => {
                                 <Text style={[styles.font, styles.complainStatus]}>สถานะการร้องเรียน</Text>
                             </TouchableOpacity>
                         </View>
-    
+
                         <View style={styles.form}>
                             <View style={styles.topic}>
                                 <TextInput style={styles.input} placeholder="หัวข้อเรื่อง" />
@@ -53,9 +53,10 @@ const ComplainForm = () => {
                                 <TextInput style={styles.input} placeholder="วันที่เกิด" />
                                 <TextInput style={styles.input} placeholder="เวลาที่เกิด" />
                             </View>
-                            <TextInput style={[styles.inputContent, styles.fontFrom]} placeholder="แจ้งร้องเรียน" />
+                            <TextInput style={[styles.inputContent, styles.fontFrom]}
+                                multiline = { true } placeholder="แจ้งร้องเรียน" />
                         </View>
-    
+
                         <View style={styles.submit}>
                             <TouchableOpacity style={styles.submitButton}>
                                 <Text style={[styles.font, styles.submitText]}>ส่งเรื่อง</Text>
@@ -65,7 +66,7 @@ const ComplainForm = () => {
                             <Text style={styles.closeButtonText}>Close</Text>
                         </TouchableOpacity>
                     </View>
-                    
+
                 </View>
             </Modal>
         </View>

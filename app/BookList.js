@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     marginLeft: -30,
+    display: 'grid',
   },
   bookCard: {
     width: '27.5%',

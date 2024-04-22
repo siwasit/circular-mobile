@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-const Home = () => {
+const SignUp = () => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -188,4 +188,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Home;
+export default SignUp;

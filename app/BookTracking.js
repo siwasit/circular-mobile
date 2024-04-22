@@ -21,10 +21,10 @@ const BookTracking = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate('BookBooking')} style={[styles.button, styles.inactiveButton]}>
                     <Text style={styles.buttonText}>Book Booking</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('MyBooking')} style={styles.button}>
+                <TouchableOpacity onPress={() => navigation.navigate('MyBooking')} style={[styles.button, styles.inactiveButton]}>
                     <Text style={styles.buttonText}>My Booking</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('BookTracking')} style={[styles.button, styles.inactiveButton]}>
+                <TouchableOpacity onPress={() => navigation.navigate('BookTracking')} style={styles.button}>
                     <Text style={styles.buttonText}>Book Tracking</Text>
                 </TouchableOpacity>
             </View>
