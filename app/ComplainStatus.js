@@ -21,12 +21,12 @@ const ComplainStatus = () => {
 
             <View style={styles.status}>
                 <View style={styles.card}>
-                    <Text style={styles.topic}>อาคารอำนวยการคณะวิศวะห้อง ว.ศ.511 ชำรุจ</Text>
+                    <Text style={styles.topic}>อาคารอำนวยการคณะวิศวะห้อง ว.ศ.511 ชำรุด</Text>
                     <Text style={[styles.statusText, styles.inProcess]}>อยู่ระหว่างดำเนินการ</Text>
                 </View>
 
                 <View style={styles.card}>
-                    <Text style={styles.topic}>แอป giggy ไม่เสถียนอีกแล้ว</Text>
+                    <Text style={styles.topic}>แอป giggy ไม่เสถียรอีกแล้ว</Text>
                     <Text style={[styles.statusText, styles.waitingReceive]}>รอรับเรื่อง</Text>
                 </View>
 
