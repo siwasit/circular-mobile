@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Modal, StyleSheet } from 'react-native';
 
 const MentalHealth = () => {
     const [btnPosition, setBtnPosition] = useState('Chosen');
@@ -19,32 +19,53 @@ const MentalHealth = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.block}></View>
-            <View style={styles.block}></View>
+            <ScrollView contentContainerStyle={styles.scrollContainer} >
+                <View style={styles.enrollContainer}>
+                    <TouchableOpacity onPress={openModal}>
+                        <Text style={styles.openButton}>Open Modal</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
 
-            <Text style={styles.mainText}>Mental Health</Text>
-            <Text style={styles.miniText}>แจ้งปัญหาสุขภาพ</Text>
+            <Modal visible={modalVisible} transparent animationType="fade">
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <ScrollView contentContainerStyle={styles.scrollContainer}>
+                            <View style={styles.block}></View>
+                            <View style={styles.block}></View>
 
-            <View style={styles.tabMenu}>
-                <TouchableOpacity onPress={() => { }} style={[styles.button, styles.bodyHealthButton]}>
-                    <Text style={styles.buttonText}>Body-Health</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { }} style={[styles.button, styles.emergencyButton]}>
-                    <Text style={styles.buttonText}>Emergency</Text>
-                </TouchableOpacity>
-            </View>
+                            <Text style={styles.mainText}>Mental Health</Text>
+                            <Text style={styles.miniText}>แจ้งปัญหาสุขภาพ</Text>
 
-            <TextInput
-                style={styles.input}
-                placeholder="แจงเหตุ...."
-                placeholderTextColor="#9B9B9B"
-            />
+                            <View style={styles.tabMenu}>
+                                <TouchableOpacity onPress={() => { }} style={[styles.button, styles.bodyHealthButton]}>
+                                    <Text style={styles.buttonText}>Body-Health</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => { }} style={[styles.button, styles.emergencyButton]}>
+                                    <Text style={styles.buttonText}>Emergency</Text>
+                                </TouchableOpacity>
+                            </View>
 
-            <View style={styles.submit}>
-                <TouchableOpacity onPress={() => { }} style={styles.submitButton}>
-                    <Text style={styles.submitButtonText}>ส่งเรื่อง</Text>
-                </TouchableOpacity>
-            </View>
+                            <TextInput
+                                style={styles.input}
+                                multiline={true}
+                                placeholder="แจ้งเหตุ...."
+                                placeholderTextColor="#9B9B9B"
+                            />
+
+                            <View style={styles.submit}>
+                                <TouchableOpacity onPress={() => { }} style={styles.submitButton}>
+                                    <Text style={styles.submitButtonText}>ส่งเรื่อง</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </ScrollView>
+                        <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
+                            <Text style={styles.closeButtonText}>Close</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+
         </View>
     );
 };
@@ -54,43 +75,48 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         alignItems: 'center',
-        justifyContent: 'center',
     },
     block: {
-        width: 365,
+        width: '100%',
         height: 10,
         backgroundColor: '#C3002F',
         opacity: 0.3,
         position: 'absolute',
         top: 0,
+        overflow: 'hidden',
     },
     mainText: {
+        marginTop: '25%',
         color: '#C3002F',
         fontSize: 40,
-        paddingLeft: 25,
-        paddingTop: 20,
+        paddingTop: 5,
+        marginLeft: '5%',
         margin: 0,
         fontFamily: 'Imprima',
     },
     miniText: {
         color: 'black',
         fontSize: 30,
-        paddingLeft: 25,
+        paddingLeft: -35,
+        marginLeft: '5%',
         margin: 0,
         fontFamily: 'Imprima',
     },
     tabMenu: {
         flexDirection: 'row',
-        width: 317,
         marginTop: 11,
         borderRadius: 50,
+        justifyContent: 'center',
         backgroundColor: 'rgba(243, 243, 243, 1)',
+        width: 250,
+        marginLeft: '13%',
+        alignItems: 'center',
     },
     button: {
         backgroundColor: 'rgba(243, 243, 243, 1)',
         borderRadius: 50,
-        width: 160,
-        height: 26,
+        width: 100,
+        height: 30,
         justifyContent: 'center',
         alignItems: 'center',
         margin: 5,
@@ -130,6 +156,40 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontFamily: 'Imprima',
     },
+
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        height: 'auto',
+    },
+    modalContent: {
+        width: 365,
+        height: 800,
+        backgroundColor: '#ffffff',
+        borderRadius: 20,
+        margin: 5,
+        padding: 2,
+        marginTop: 10,
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 20,
+        right: 20,
+    },
+    closeButtonText: {
+        fontSize: 15,
+        color: '#333',
+    },
+    openButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#87c4ff',
+        borderRadius: 20,
+        marginTop: '50%',
+        padding: 10,
+      },
 });
 
 export default MentalHealth;
