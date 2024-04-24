@@ -7,12 +7,12 @@ const ComplainCard = () => {
             <View style={styles.container}>
                 <View style={styles.coursesBox}>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/enroll.png')} style={styles.itemImage} />
+                        <Image source={require('../img/enroll.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fffbda' }]} />
                         <Text style={styles.itemTitle}>Complain</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/health.png')} style={styles.itemImage} />
+                        <Image source={require('../img/health.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#ffcdea' }]} />
                         <Text style={styles.itemTitle}>Complain Status</Text>
                     </TouchableOpacity>

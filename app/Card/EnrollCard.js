@@ -7,22 +7,22 @@ const EnrollCard = () => {
             <View style={styles.container}>
                 <View style={styles.coursesBox}>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/enroll.png')} style={styles.itemImage} />
+                        <Image source={require('../img/enroll.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fffbda' }]} />
                         <Text style={styles.itemTitle}>Enroll</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/health.png')} style={styles.itemImage} />
+                        <Image source={require('../img/health.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#ffcdea' }]} />
                         <Text style={styles.itemTitle}>Exam</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/exam.png')} style={styles.itemImage} />
+                        <Image source={require('../img/exam.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#dff5ff' }]} />
                         <Text style={styles.itemTitle}>Schedule</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/library.png')} style={styles.itemImage} />
+                        <Image source={require('../img/library.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fae7f3' }]} />
                         <Text style={styles.itemTitle}>Transcript</Text>
                     </TouchableOpacity>
