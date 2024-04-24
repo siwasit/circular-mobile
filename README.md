@@ -1,1 +1,1 @@
-Circular for Mobile App. created mostly by TypeScript. (Only Final drafts are shown here)
+Circular for Mobile App. created mostly by JavaScript's framework 'React Native'. (Only Final drafts are shown here)
