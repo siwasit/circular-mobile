@@ -59,7 +59,7 @@ const Schedule = () => {
                   </View>
                 </View>
                 <View style={styles.calendarPic}>
-                  <Image source={require('./img/calendar.png')} style={styles.calendarImage} />
+                  <Image source={require('../img/calendar.png')} style={styles.calendarImage} />
                 </View>
                 <View style={styles.dayDiv}>
                   <Text style={styles.dayText}>25 Sunday</Text>
