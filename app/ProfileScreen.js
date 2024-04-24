@@ -5,76 +5,78 @@ import LinearGradient from 'react-native-linear-gradient';
 const ProfileScreen = () => {
     return (
         <View style={styles.container}>
-            <LinearGradient colors={['#FF0000', '#FFD12F']}>
-                <ScrollView>
-                    <View style={styles.profileCard}>
-                        <View style={styles.top}>
-                            <View style={styles.picture}>
-                                <Image style={styles.pictureImage} />
-                            </View>
-                            <View style={styles.info}>
-                                <View style={styles.name}>
-                                    <Text style={styles.firstName}>Nutpraphut</Text>
-                                    <Text style={styles.lastName}>Praphutsirikul</Text>
-                                </View>
-                                <View style={styles.school}>
-                                    <Image source={require('./img/Main-Logo.png')} style={styles.schoolLogo} />
-                                    <View style={styles.schoolInfo}>
-                                        <Text style={styles.fieldOfStudy}>SOFTWARE ENGINEERING</Text>
-                                        <Text style={styles.schoolName}>THAMMASAT SCHOOL OF ENGINEERING</Text>
-                                    </View>
-                                </View>
-                                <View style={styles.details}>
-                                    <View style={styles.detailTab}>
-                                        <Text style={styles.detailNum}>6510742460</Text>
-                                        <Text style={styles.detailLabel}>STUDENT ID</Text>
-                                    </View>
-                                    <View style={styles.detailTab}>
-                                        <Text style={styles.detailNum}>3.xx</Text>
-                                        <Text style={styles.detailLabel}>G.P.A.</Text>
-                                    </View>
-                                    <View style={styles.detailTab}>
-                                        <Text style={styles.detailNum}>57</Text>
-                                        <Text style={styles.detailLabel}>CREDITS</Text>
-                                    </View>
-                                </View>
-                            </View>
+            <ScrollView>
+                <View style={styles.profileCard}>
+                    <View style={styles.top}>
+                        <View style={styles.picture}>
+                            <Image style={styles.pictureImage} />
                         </View>
-                        <View style={styles.bottom}>
-                            <Image style={styles.bottomImage} />
-                            <View style={styles.tab}>
-                                <Text style={styles.professor}>ASS.PROF.DR. xxxxxxx xxxxxxx</Text>
-                                <Text style={styles.schoolInfo}>THAMMASAT SCHOOL OF ENGINEERING</Text>
+                        <View style={styles.info}>
+                            <View style={styles.name}>
+                                <Text style={styles.firstName}>Nutpraphut</Text>
+                                <Text style={styles.lastName}>Praphutsirikul</Text>
+                            </View>
+                            <View style={styles.school}>
+                                <Image source={require('./img/Main-Logo.png')} style={styles.schoolLogo} />
+                                <View style={styles.schoolInfo}>
+                                    <Text style={styles.fieldOfStudy}>SOFTWARE ENGINEERING</Text>
+                                    <Text style={styles.schoolName}>THAMMASAT SCHOOL OF ENGINEERING</Text>
+                                </View>
+                            </View>
+                            <View style={styles.details}>
+                                <View style={styles.detailTab}>
+                                    <Text style={styles.detailNum}>6510742460</Text>
+                                    <Text style={styles.detailLabel}>STUDENT ID</Text>
+                                </View>
+                                <View style={styles.detailTab}>
+                                    <Text style={styles.detailNum}>3.xx</Text>
+                                    <Text style={styles.detailLabel}>G.P.A.</Text>
+                                </View>
+                                <View style={styles.detailTab}>
+                                    <Text style={styles.detailNum}>57</Text>
+                                    <Text style={styles.detailLabel}>CREDITS</Text>
+                                </View>
                             </View>
                         </View>
                     </View>
-
-                    <View style={styles.detailsContainer}>
-                        <View style={styles.detailTab}>
-                            <Image style={styles.detailIcon} />
-                            <Text style={styles.detailName}>PAYMENT LIST</Text>
-                            <Image style={styles.detailArrow} />
-                        </View>
-                        <View style={styles.detailTab}>
-                            <Image style={styles.detailIcon} />
-                            <Text style={styles.detailName}>CALENDAR</Text>
-                            <Image style={styles.detailArrow} />
-                        </View>
-                        <View style={styles.detailTab}>
-                            <Image style={styles.detailIcon} />
-                            <Text style={styles.detailName}>SETTING</Text>
-                            <Image style={styles.detailArrow} />
-                        </View>
-                        <View style={styles.detailTab}>
-                            <Image style={styles.detailIcon} />
-                            <Text style={styles.detailName}>SIGN OUT</Text>
-                            <Image style={styles.detailArrow} />
+                    <View style={styles.bottom}>
+                        <Image style={styles.bottomImage} />
+                        <View style={styles.tab}>
+                            <Text style={styles.professor}>ASS.PROF.DR. xxxxxxx xxxxxxx</Text>
+                            <Text style={styles.schoolInfo}>THAMMASAT SCHOOL OF ENGINEERING</Text>
                         </View>
                     </View>
+                </View>
 
-                    <Image style={styles.cardImage} />
-                </ScrollView>
-            </LinearGradient>
+                <View style={styles.detailsContainer}>
+                    <View style={styles.bottomDetailTab}>
+                        <Image style={styles.detailIcon} />
+                        <Text style={styles.detailName}>PAYMENT LIST</Text>
+                        <Image style={styles.detailArrow} />
+                    </View>
+                    <View style={styles.line} />
+                    <View style={styles.bottomDetailTab}>
+                        <Image style={styles.detailIcon} />
+                        <Text style={styles.detailName}>CALENDAR</Text>
+                        <Image style={styles.detailArrow} />
+                    </View>
+                </View>
+                <View style={styles.detailsContainer}>
+                    <View style={styles.bottomDetailTab}>
+                        <Image style={styles.detailIcon} />
+                        <Text style={styles.detailName}>SETTING</Text>
+                        <Image style={styles.detailArrow} />
+                    </View>
+                    <View style={styles.line} />
+                    <View style={styles.bottomDetailTab}>
+                        <Image style={styles.detailIcon} />
+                        <Text style={styles.detailName}>SIGN OUT</Text>
+                        <Image style={styles.detailArrow} />
+                    </View>
+                </View>
+
+                <Image style={styles.cardImage} />
+            </ScrollView>
         </View>
     );
 };
@@ -83,13 +85,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        alignItems: 'center',
+        width: '100%',
     },
     profileCard: {
         backgroundColor: 'rgb(255, 255, 255)',
         borderRadius: 32,
-        overflow: 'hidden',
         paddingBottom: 7,
-        width: '100%',
+        width: '98%',
+        left: '1%',
     },
     top: {
         flexDirection: 'row',
@@ -98,29 +102,31 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 'auto',
+        left: '5%',
+        top: '5%',
     },
     pictureImage: {
-        height: 120,
-        width: 120,
+        height: 150,
+        width: 150,
         backgroundColor: 'lightgray',
         position: 'absolute',
         borderRadius: 180,
-        left: '90%',
+        left: '30%',
     },
     info: {
         marginLeft: '29%',
         marginTop: 45,
         backgroundColor: '#f3f3f3',
         width: '90%',
-        height: 251,
+        height: '100%',
         borderRadius: 34,
-        right: '30%',
+        right: '45%',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: -1,
     },
     name: {
-        left: '70%',
+        left: '64%',
         bottom: '10%',
     },
     firstName: {
@@ -145,7 +151,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         width: 180,
         height: 42,
-        marginLeft: '40%',
+        marginLeft: '42%',
     },
     schoolLogo: {
         height: 33,
@@ -167,12 +173,12 @@ const styles = StyleSheet.create({
     },
     details: {
         flexDirection: 'row',
-        marginTop: 7,
-        marginLeft: '40%',
+        marginTop: 10,
+        marginLeft: '35%',
     },
     detailTab: {
         alignItems: 'center',
-        marginRight: 10,
+        marginLeft: 10,
     },
     detailNum: {
         fontSize: 15,
@@ -190,7 +196,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 249, 249, 1)',
         borderRadius: 20,
         marginHorizontal: 19,
-        marginTop: 10,
+        bottom: '7%',
+        marginLeft: 10,
+        width: 360,
     },
     bottomImage: {
         marginLeft: 10,
@@ -214,17 +222,23 @@ const styles = StyleSheet.create({
     detailsContainer: {
         backgroundColor: 'rgba(243, 243, 243, 1)',
         borderRadius: 20,
-        height: 128,
-        marginTop: 16,
-        paddingHorizontal: 32,
-        justifyContent: 'space-between',
+        height: 103,
+        marginTop: 12,
+        marginVertical: 5,
+        bottom: '10%',
+        width: 380,
+        left: '1.1%',
+    },
+    bottomDetailTab: {
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     detailIcon: {
         height: 20,
         width: 20,
     },
     detailName: {
-        fontSize: 14,
+        fontSize: 13,
         fontFamily: 'Kanit',
         fontWeight: '400',
     },
@@ -237,6 +251,12 @@ const styles = StyleSheet.create({
         width: 350,
         height: 'auto',
     },
+    line: {
+        width: '80%',
+        height: 2,
+        backgroundColor: '#c2c2c2',
+        left: '10%',
+    }
 });
 
 export default ProfileScreen;
