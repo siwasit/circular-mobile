@@ -17,7 +17,7 @@ const ProfileScreen = () => {
                                 <Text style={styles.lastName}>Praphutsirikul</Text>
                             </View>
                             <View style={styles.school}>
-                                <Image source={require('./img/Main-Logo.png')} style={styles.schoolLogo} />
+                                <Image source={require('../img/Main-Logo.png')} style={styles.schoolLogo} />
                                 <View style={styles.schoolInfo}>
                                     <Text style={styles.fieldOfStudy}>SOFTWARE ENGINEERING</Text>
                                     <Text style={styles.schoolName}>THAMMASAT SCHOOL OF ENGINEERING</Text>
