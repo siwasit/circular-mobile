@@ -7,19 +7,19 @@ const BookList = () => {
       id: 1,
       title: 'คุณอาเรียโต๊ะข้างๆ พูดภาษารัสเซียหวานใส่ซะหัวใจจะวาย',
       author: 'SunSunSun',
-      imageUrl: require('./img/books/tokidoki.png'),
+      imageUrl: require('../img/books/tokidoki.png'),
     },
     {
       id: 2,
       title: "มุมมองนักอ่านพระเจ้า (1)",
       author: 'Sing Shong',
-      imageUrl: require('./img/books/reader.jpg'),
+      imageUrl: require('../img/books/reader.jpg'),
     },
     {
       id: 3,
       title: '極楽街\nสุขาวดีสีเลือด',
       author: 'Yuto Sano',
-      imageUrl: require('./img/books/gokurakugai.jpg'),
+      imageUrl: require('../img/books/gokurakugai.jpg'),
     },
   ];
 

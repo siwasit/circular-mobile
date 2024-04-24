@@ -40,9 +40,9 @@ const BookBooking = ({ navigation }) => {
             {/* Best Selling Books */}
             <View style={styles.bestSellingContainer}>
                 <Text style={styles.bestSellingTitle}>Best Selling Books</Text>
-                <View style={styles.bestSellingBooks}>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={true} style={styles.recommendedScroll}>
                     <BookList />
-                </View>
+                </ScrollView>
             </View>
         </ScrollView>
     );
@@ -136,11 +136,10 @@ const styles = StyleSheet.create({
     },
     bestSellingContainer: {
         marginTop: 21,
-        marginLeft: 14,
-        marginRight: 14,
-        marginRight: 34,
-        height: 188,
-        width: 337,
+        margin: 15,
+        paddingBottom: 25,
+        width: 'auto',
+        height: 'auto',
     },
     bestSellingTitle: {
         fontSize: 20,

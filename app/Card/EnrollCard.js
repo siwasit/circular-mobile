@@ -26,6 +26,11 @@ const EnrollCard = () => {
                         <View style={[styles.itemBackground, { backgroundColor: '#fae7f3' }]} />
                         <Text style={styles.itemTitle}>Transcript</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.coursesItem}>
+                        <Image source={require('../img/exam.png')} style={styles.itemImage} />
+                        <View style={[styles.itemBackground, { backgroundColor: '#dff5ff' }]} />
+                        <Text style={styles.itemTitle}>Inform</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </ScrollView>
