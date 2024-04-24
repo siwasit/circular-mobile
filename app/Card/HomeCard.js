@@ -8,37 +8,37 @@ const HomeCard = ({}) => {
             <View style={styles.container}>
                 <View style={styles.coursesBox}>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/enroll.png')} style={styles.itemImage} />
+                        <Image source={require('../img/enroll.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fffbda' }]} />
                         <Text style={styles.itemTitle}>Study</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/health.png')} style={styles.itemImage} />
+                        <Image source={require('../img/health.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#ffcdea' }]} />
                         <Text style={styles.itemTitle}>Health</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/exam.png')} style={styles.itemImage} />
+                        <Image source={require('../img/exam.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#dff5ff' }]} />
                         <Text style={styles.itemTitle}>Reservation</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/library.png')} style={styles.itemImage} />
+                        <Image source={require('../img/library.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fae7f3' }]} />
                         <Text style={styles.itemTitle}>Library</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/dorm.png')} style={styles.itemImage} />
+                        <Image source={require('../img/dorm.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#ffe7e1' }]} />
                         <Text style={styles.itemTitle}>Dormitory</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/party.png')} style={styles.itemImage} />
+                        <Image source={require('../img/party.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#f1eaff' }]} />
                         <Text style={styles.itemTitle}>Complain</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('./img/car.png')} style={styles.itemImage} />
+                        <Image source={require('../img/car.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fae7f3' }]} />
                         <Text style={styles.itemTitle}>Transportation</Text>
                     </TouchableOpacity>
