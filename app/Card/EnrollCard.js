@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, StatusBar, Image } from 'react-native';
 
-const EnrollCard = ({ navigation }) => {
+function EnrollCard({ navigation }) {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <View style={styles.coursesBox}>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={navigation.navigate('Enroll')}>
                         <Image source={require('../img/enroll.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fffbda' }]} />
                         <Text style={styles.itemTitle}>Enroll</Text>
