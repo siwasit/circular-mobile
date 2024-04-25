@@ -6,7 +6,7 @@ function EnrollCard({ navigation }) {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <View style={styles.coursesBox}>
-                    <TouchableOpacity style={styles.coursesItem} onPress={navigation.navigate('Enroll')}>
+                    <TouchableOpacity style={styles.coursesItem} >
                         <Image source={require('../img/enroll.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fffbda' }]} />
                         <Text style={styles.itemTitle}>Enroll</Text>

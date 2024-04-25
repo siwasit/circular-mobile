@@ -39,7 +39,7 @@ const HomeCard = ({ navigation }) => {
                         <View style={[styles.itemBackground, { backgroundColor: '#f1eaff' }]} />
                         <Text style={styles.itemTitle}>Complain</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={navigation.navigate('TransportCard')}>
                         <Image source={require('../img/car.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fae7f3' }]} />
                         <Text style={styles.itemTitle}>Transportation</Text>

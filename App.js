@@ -13,6 +13,7 @@ import DormCard from './app/Card/DormCard.js';
 import LibraryCard from './app/Card/LibraryCard.js';
 import RoomBooking from './app/Reserve/RoomBooking.js';
 import ComplainCard from './app/Card/ComplainCard.js';
+import TransportCard from './app/Card/TransportCard.js';
 
 //Screen names
 const homeName = "Home";
@@ -32,6 +33,7 @@ export default function App() {
         <Stack.Screen name='LibraryCard' component={LibraryCard} />
         <Stack.Screen name='DormCard' component={DormCard} />
         <Stack.Screen name='ComplainCard' component={ComplainCard} />
+        <Stack.Screen name='TransportCard' component={TransportCard} />
       </Stack.Navigator>
     </NavigationContainer>
   );
