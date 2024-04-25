@@ -33,6 +33,9 @@ import ComplainStatus from './app/Complain/ComplainStatus.js'
 
 import RoomBooking from './app/Reserve/RoomBooking.js'
 
+import PublicBus from './app/Transportation/PublicBus.js';
+import CampusBus from './app/Transportation/CampusBus.js';
+
 //Screen names
 const homeName = "Home";
 const profilesName = "Profile";
@@ -43,35 +46,39 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen name='Home' component={HomeTab}/>
-    //     <Stack.Screen name='Enroll Card' component={EnrollCard} />
-    //     <Stack.Screen name='Health Card' component={HealthCard} />
-    //     <Stack.Screen name='Library Card' component={LibraryCard} />
-    //     <Stack.Screen name='Reserve Card' component={ReserveCard} />
-    //     <Stack.Screen name='Dorm Card' component={DormCard} />
-    //     <Stack.Screen name='Complain Card' component={ComplainCard} />
-    //     <Stack.Screen name='Transport Card' component={TransportCard} />
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='Home' component={HomeTab}/>
+        <Stack.Screen name='Enroll Card' component={EnrollCard} />
+        <Stack.Screen name='Health Card' component={HealthCard} />
+        <Stack.Screen name='Library Card' component={LibraryCard} />
+        <Stack.Screen name='Reserve Card' component={ReserveCard} />
+        <Stack.Screen name='Dorm Card' component={DormCard} />
+        <Stack.Screen name='Complain Card' component={ComplainCard} />
+        <Stack.Screen name='Transport Card' component={TransportCard} />
 
-    //     <Stack.Screen name='Enroll' component={Enroll} />
-    //     <Stack.Screen name='Exam' component={Exam} />
-    //     <Stack.Screen name='Schedule' component={Schedule} />
-    //     <Stack.Screen name='Transcript' component={Transcript} />
-    //     <Stack.Screen name='Inform' component={Inform} />
+        <Stack.Screen name='Enroll' component={Enroll} />
+        <Stack.Screen name='Exam' component={Exam} />
+        <Stack.Screen name='Schedule' component={Schedule} />
+        <Stack.Screen name='Transcript' component={Transcript} />
+        <Stack.Screen name='Inform' component={Inform} />
 
-    //     <Stack.Screen name='Mental Health' component={MentalHealth} />
+        <Stack.Screen name='Mental Health' component={MentalHealth} />
 
-    //     <Stack.Screen name='Book Booking' component={BookBooking} />
-    //     <Stack.Screen name='My Booking' component={MyBooking} />
-    //     <Stack.Screen name='Book Tracking' component={BookTracking} />
+        <Stack.Screen name='Book Booking' component={BookBooking} />
+        <Stack.Screen name='My Booking' component={MyBooking} />
+        <Stack.Screen name='Book Tracking' component={BookTracking} />
 
-    //     <Stack.Screen name='Complain Form' component={ComplainForm} />
-    //     <Stack.Screen name='Complain Status' component={ComplainStatus} />
+        <Stack.Screen name='Complain Form' component={ComplainForm} />
+        <Stack.Screen name='Complain Status' component={ComplainStatus} />
 
-    //   </Stack.Navigator>
-    // </NavigationContainer>
-    <RoomBooking />
+        <Stack.Screen name='Public Bus' component={PublicBus} />
+        <Stack.Screen name='Campus Bus' component={CampusBus} />
+
+        <Stack.Screen name='Room Booking' component={RoomBooking} />
+
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

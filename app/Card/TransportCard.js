@@ -6,13 +6,13 @@ const TransportCard = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <View style={styles.coursesBox}>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Public Bus')}>
                         <Image source={require('../img/enroll.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fffbda' }]} />
                         <Text style={styles.itemTitle}>Public Bus</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('../img/health.png')} style={styles.itemImage} />
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Campus Bus')}>
+                        <Image source={require('../img/car.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#ffcdea' }]} />
                         <Text style={styles.itemTitle}>Campus Bus</Text>
                     </TouchableOpacity>
