@@ -8,8 +8,8 @@ const PublicBus = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.mainText}>Campus Bus 🚌</Text>
-      <Text style={styles.miniText}>รถมหาวิทยาลัย</Text>
+      <Text style={styles.mainText}>Public Bus 🚌</Text>
+      <Text style={styles.miniText}>รถสาธารณะ</Text>
       <View style={styles.imageContainer}>
       </View>
       <TouchableOpacity onPress={openAppStore} style={styles.button}>
