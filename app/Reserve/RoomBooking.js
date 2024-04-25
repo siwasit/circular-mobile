@@ -1,221 +1,230 @@
 import React from 'react';
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
 const RoomBooking = () => {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.mainText}>Study Room 🛌</Text>
-          <Text style={styles.miniText}>จองห้องติว</Text>
-        </View>
-
-        <View style={styles.tabWrapper}>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={[styles.font, styles.mainText]}>Study Room 🛌</Text>
+        <Text style={[styles.font, styles.miniText]}>จองห้องติว</Text>
+      </View>
+      <View style={styles.nav}>
+        <View style={styles.wrapper}>
           <View style={styles.tabMenu}>
-            <TouchableOpacity style={[styles.tabButton, styles.rangsit]}>
-              <Text style={styles.font}>Rangsit</Text>
-              <Text style={styles.font}>Campus</Text>
+            <TouchableOpacity>
+              <Text style={[styles.font, styles.Rangsit]}>Rangsit</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.tabButton, styles.thaPrahanm]}>
-              <Text style={styles.font}>Tha Prahanm</Text>
-              <Text style={styles.font}>Campus</Text>
+            <TouchableOpacity>
+              <Text style={[styles.font, styles.ThaPrahanm]}>Tha Prahanm</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.tabButton, styles.lampang]}>
-              <Text style={styles.font}>Lampang</Text>
-              <Text style={styles.font}>Campus</Text>
+            <TouchableOpacity>
+              <Text style={[styles.font, styles.Lampang]}>Lampang</Text>
             </TouchableOpacity>
           </View>
-
           <View style={styles.tabMenu}>
-            <TouchableOpacity style={[styles.tabButton, styles.puey]}>
-              <Text style={styles.font}>Puey</Text>
-              <Text style={styles.font}>Ungpakorn</Text>
+            <TouchableOpacity>
+              <Text style={[styles.font, styles.Puey]}>Puey Ungpakorn</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.tabButton, styles.skr]}>
-              <Text style={styles.font}>ศูนย์การเรียนรู้</Text>
-              <Text style={styles.font}>กรมหลวงนราธิวาสราชนครินทร์</Text>
+            <TouchableOpacity>
+              <Text style={[styles.font, styles.SKR]}>ศูนย์การเรียนรู้กรมหลวงนราธิวาสราชนครินทร์</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.tabButton, styles.coLearning]}>
-              <Text style={styles.font}>Co-Learning</Text>
-              <Text style={styles.font}>Puey Ungphakorn</Text>
+            <TouchableOpacity>
+              <Text style={[styles.font, styles.CoLearning]}>Co-Learning</Text>
             </TouchableOpacity>
-            {/* Add more location buttons here */}
-          </View>
-        </View>
-
-        {/* Add the list of study room cards here */}
-        <View style={styles.studyRoomList}>
-          <View style={styles.card}>
-            <View style={styles.top}>
-              <Image source={require('../img/dorm1.png')} />
-              <View style={styles.content}>
-                <Text style={styles.nameRoom}>Study Room 1</Text>
-                <View style={styles.at}>
-                  <View style={styles.location}>
-                    <Image source={require('../img/svg/marker.svg')} />
-                    <Text style={styles.font}>Rangsit Campus</Text>
-                  </View>
-                  <View style={styles.location}>
-                    <Image source={require('../img/svg/home.svg')} />
-                    <Text style={styles.font}>Puey Ungpakorn Library</Text>
-                  </View>
-                  <View style={styles.location}>
-                    <Image source={require('../img/svg/Floot.svg')} />
-                    <Text style={styles.font}>Fl.1</Text>
-                  </View>
-                </View>
-                <View style={styles.period}>
-                  <TouchableOpacity style={styles.openButton}><Text style={styles.font}>09:00 - 12:00</Text></TouchableOpacity>
-                  <TouchableOpacity style={styles.notButton}><Text style={styles.font}>12:00 - 15:00</Text></TouchableOpacity>
-                  <TouchableOpacity style={styles.notButton}><Text style={styles.font}>15:00 - 18:00</Text></TouchableOpacity>
-                  <TouchableOpacity style={styles.notButton}><Text style={styles.font}>18:00 - 21:00</Text></TouchableOpacity>
-                  <TouchableOpacity style={styles.closedButton}><Text style={styles.font}>CLOSED</Text></TouchableOpacity>
-                </View>
-              </View>
-            </View>
-            <View style={styles.down}>
-              <View style={styles.content}>
-                <View style={styles.inOf}>
-                  <Image source={require('../img/svg/Frame.svg')} />
-                  <View>
-                    <Text style={styles.font}>TV</Text>
-                    <Text style={styles.font}>Standard</Text>
-                  </View>
-                </View>
-                {/* Repeat similar in-of views for other features */}
-                <View style={styles.inOf}>
-                  <Image source={require('../img/svg/people.svg')} />
-                  <Text style={[styles.font, styles.num]}>6-16</Text>
-                </View>
-              </View>
-            </View>
+            <TouchableOpacity>
+              <Text style={[styles.font, styles.Multimedia]}>Multimedia Lab</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={[styles.font, styles.NongyaoChaiseri]}>Nongyao Chaiseri Libary</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={[styles.font, styles.SeatReservation]}>จองที่นั่ง หอสมุดป๋วย</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
-    </ScrollView>
+      <ScrollView style={styles.main}>
+        <View style={styles.wrapper}>
+          <Card
+            imageSource={require('../img/dorm1.png')}
+            name="Study Room 1"
+            location="Rangsit Campus"
+            library="Puey Ungpakorn Libary"
+            floor="Fl.1"
+            timings={[
+              { time: '09:00 - 12:00', status: 'OPEN' },
+              { time: '12:00 - 15:00', status: 'NOT' },
+              { time: '15:00 - 18:00', status: 'NOT' },
+              { time: '18:00 - 21:00', status: 'Not' },
+              { time: 'CLOSED', status: 'CLOSED' }
+            ]}
+            amenities={['TV Standard', 'Marker Libary of things', 'HDMI Libary of things', 'WIFI Support']}
+            capacity="6-16"
+          />
+          {/* Add more Card components here for additional study rooms */}
+        </View>
+      </ScrollView>
+    </View>
   );
-};
+}
 
-const styles = {
+const Card = ({ imageSource, name, location, library, floor, timings, amenities, capacity }) => (
+  <View style={styles.card}>
+    <View style={styles.top}>
+      <Image source={imageSource} style={styles.image} />
+      <View style={styles.content}>
+        <Text style={[styles.font, styles.nameRoom]}>{name}</Text>
+        <View style={styles.at}>
+          <Text style={styles.font}>{location}</Text>
+          <Text style={styles.font}>{library}</Text>
+          <Text style={styles.font}>{floor}</Text>
+        </View>
+        <View style={styles.period}>
+          {timings.map((item, index) => (
+            <TouchableOpacity key={index} style={[styles.button, styles[item.status.toLowerCase()]]}>
+              <Text style={styles.font}>{item.time}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+    </View>
+    <View style={styles.down}>
+      <View style={styles.content}>
+        {amenities.map((item, index) => (
+          <View key={index} style={styles.inOf}>
+            <Image source={require(item.icon)} style={styles.icon} />
+            <Text style={styles.font}>{item.text}</Text>
+          </View>
+        ))}
+        <View style={styles.inOf}>
+          <Text style={[styles.font, styles.num]}>{capacity}</Text>
+        </View>
+      </View>
+    </View>
+  </View>
+);
+
+const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
-    backgroundColor: '#EAECF3',
-    padding: 2,
-    width: '100%',
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  font: {
+    fontFamily: 'Imprima',
   },
   header: {
-    paddingVertical: 20,
+    paddingTop: 42,
+    paddingLeft: 25,
   },
   mainText: {
     color: '#C3002F',
     fontSize: 40,
-    paddingLeft: 25,
   },
   miniText: {
     color: 'black',
     fontSize: 30,
-    paddingLeft: 25,
   },
-  tabWrapper: {
-    width: 'auto',
+  nav: {
+    marginTop: 20,
+  },
+  wrapper: {
+    marginHorizontal: 20,
   },
   tabMenu: {
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 11,
-  },
-  tabButton: {
-    backgroundColor: '#F3F3F3',
-    borderRadius: 10,
-    width: 100,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
     marginBottom: 10,
   },
-  font: {
-    fontSize: 15,
-  },
-  rangsit: {
+  Rangsit: {
     backgroundColor: '#FFDFAE',
   },
-  thaPrahanm: {
-    backgroundColor: '#F3F3F3',
+  ThaPrahanm: {
+    backgroundColor: 'rgba(243, 243, 243, 1)',
   },
-  lampang: {
-    backgroundColor: '#F3F3F3',
+  Lampang: {
+    backgroundColor: 'rgba(243, 243, 243, 1)',
   },
-  puey: {
+  Puey: {
     backgroundColor: '#ffef95',
   },
-  studyRoomList: {
-    height: 400,
-    weight: '100%',
-    left: '50%',
+  SKR: {
+    fontSize: 9,
   },
-
-  //card styles
+  CoLearning: {
+  },
+  Multimedia: {
+    fontSize: 11,
+  },
+  NongyaoChaiseri: {
+    fontSize: 11,
+  },
+  SeatReservation: {
+    fontSize: 11,
+  },
   card: {
     borderWidth: 1,
-    borderRadius: 1,
     borderColor: '#ffffff',
-    display: 'flex',
-    flexDirection: 'column',
-    height: 110,
+    borderRadius: 1,
     backgroundColor: 'white',
-    marginBottom: 10,
+    marginVertical: 10,
   },
   top: {
     flexDirection: 'row',
+    alignItems: 'center',
     padding: 10,
+    backgroundColor: '#ffffff',
+  },
+  image: {
+    height: 50,
+    alignSelf: 'center',
   },
   content: {
     flex: 1,
-    paddingLeft: 10,
+    marginLeft: 10,
   },
   nameRoom: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: '900',
+    marginBottom: 2,
   },
   at: {
     flexDirection: 'row',
-    marginTop: 5,
-  },
-  location: {
-    flexDirection: 'row',
-    marginRight: 10,
+    alignItems: 'center',
   },
   period: {
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 4,
   },
-  openButton: {
+  button: {
     backgroundColor: '#e06169',
-    borderRadius: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
     marginRight: 3,
+    borderRadius: 2,
     padding: 3,
   },
-  notButton: {
+  NOT: {
     backgroundColor: '#e06169',
-    borderRadius: 2,
-    marginRight: 3,
-    padding: 3,
   },
-  closedButton: {
+  OPEN: {
+    backgroundColor: '#45d84c',
+  },
+  CLOSED: {
     backgroundColor: '#bfbfbf',
-    borderRadius: 2,
-    marginRight: 3,
-    padding: 3,
   },
   down: {
+    padding: 10,
     borderTopWidth: 0.5,
     borderTopColor: '#888888',
-    padding: 10,
+    paddingTop: 8,
   },
   inOf: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 5,
+  },
+  icon: {
+    height: 10,
   },
   num: {
     color: '#d84a45',
@@ -224,9 +233,7 @@ const styles = {
     borderRadius: 5,
     fontSize: 8.3,
   },
-  font: {
-    fontSize: 10,
-  },
-};
+});
 
-export default RoomBooking;
+
+export default RoomBooking
