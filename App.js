@@ -4,18 +4,23 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-import EnrollCard from './app/Card/EnrollCard';
-import HealthCard from './app/Card/HealthCard';
 import ProfileScreen from './app/Profiles/ProfileScreen';
 import Class from './app/Class/Class.js';
+
+import EnrollCard from './app/Card/EnrollCard';
+import HealthCard from './app/Card/HealthCard';
 import HomeCard from './app/Card/HomeCard.js'
 import DormCard from './app/Card/DormCard.js';
 import LibraryCard from './app/Card/LibraryCard.js';
-import Enroll from './app/Study/Enroll.js'
 import ComplainCard from './app/Card/ComplainCard.js';
 import TransportCard from './app/Card/TransportCard.js';
 import ReserveCard from './app/Card/ReserveCard.js';
+
+import Enroll from './app/Study/Enroll.js'
 import Exam from './app/Study/Exam.js'
+import Schedule from './app/Study/Schedule.js'
+import Transcript from './app/Study/Transcipt.js'
+import Inform from './app/Study/Inform.js'
 
 //Screen names
 const homeName = "Home";
@@ -40,6 +45,9 @@ export default function App() {
 
         <Stack.Screen name='Enroll' component={Enroll} />
         <Stack.Screen name='Exam' component={Exam} />
+        <Stack.Screen name='Schedule' component={Schedule} />
+        <Stack.Screen name='Transcript' component={Transcript} />
+        <Stack.Screen name='Inform' component={Inform} />
       </Stack.Navigator>
     </NavigationContainer>
   );

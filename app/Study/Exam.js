@@ -22,7 +22,7 @@ const Exam = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.enrollContainer}>
           <TouchableOpacity onPress={openModal}>
-            <Text style={styles.openButton}>Open Modal</Text>
+            <Text style={styles.openButton}>Exam</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

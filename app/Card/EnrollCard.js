@@ -18,17 +18,17 @@ const EnrollCard = ({ navigation }) => {
                         <View style={[styles.itemBackground, { backgroundColor: '#ffcdea' }]} />
                         <Text style={styles.itemTitle}>Exam</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Schedule')}>
                         <Image source={require('../img/exam.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#dff5ff' }]} />
                         <Text style={styles.itemTitle}>Schedule</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Transcript')}>
                         <Image source={require('../img/library.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fae7f3' }]} />
                         <Text style={styles.itemTitle}>Transcript</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Inform')}>
                         <Image source={require('../img/exam.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#dff5ff' }]} />
                         <Text style={styles.itemTitle}>Inform</Text>
