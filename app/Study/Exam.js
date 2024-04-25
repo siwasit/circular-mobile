@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
 
-const Exam = () => {
+const Exam = ({ navigation }) => {
   const [btnPosition, setBtnPosition] = useState('Chosen');
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -59,7 +59,7 @@ const Exam = () => {
                   </View>
                 </View>
                 <View style={styles.calendarPic}>
-                  <Image source={require('./img/calendar.png')} style={styles.calendarImage} />
+                  <Image source={require('../img/calendar.png')} style={styles.calendarImage} />
                 </View>
                 <View style={styles.dayDiv}>
                   <Text style={styles.dayText}>25 Sunday</Text>

@@ -1,12 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Inform = () => {
-    // const [btnPosition, setBtnPosition] = useState('Chosen');
-
-    // const toggleOption = (option) => {
-    //     setBtnPosition(option);
-    // };
+const Inform = ({ navigation }) => {
 
     return (
         <View style={styles.container}>

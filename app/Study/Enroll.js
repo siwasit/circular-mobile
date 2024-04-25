@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
 
-function Enroll({ navigation }) {
+const Enroll = ({ navigation }) => {
     const [btnPosition, setBtnPosition] = useState('Chosen');
     const [modalVisible, setModalVisible] = useState(false);
 
