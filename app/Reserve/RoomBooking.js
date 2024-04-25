@@ -3,7 +3,8 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 
 const RoomBooking = () => {
   return (
-    <View style={styles.container}>
+    <ScrollView>
+      <View style={styles.container}>
       <View style={styles.header}>
         <Text style={[styles.font, styles.mainText]}>Study Room 🛌</Text>
         <Text style={[styles.font, styles.miniText]}>จองห้องติว</Text>
@@ -11,33 +12,33 @@ const RoomBooking = () => {
       <View style={styles.nav}>
         <View style={styles.wrapper}>
           <View style={styles.tabMenu}>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
               <Text style={[styles.font, styles.Rangsit]}>Rangsit</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
               <Text style={[styles.font, styles.ThaPrahanm]}>Tha Prahanm</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
               <Text style={[styles.font, styles.Lampang]}>Lampang</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.tabMenu}>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
               <Text style={[styles.font, styles.Puey]}>Puey Ungpakorn</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
               <Text style={[styles.font, styles.SKR]}>ศูนย์การเรียนรู้กรมหลวงนราธิวาสราชนครินทร์</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
               <Text style={[styles.font, styles.CoLearning]}>Co-Learning</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
               <Text style={[styles.font, styles.Multimedia]}>Multimedia Lab</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
               <Text style={[styles.font, styles.NongyaoChaiseri]}>Nongyao Chaiseri Libary</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
               <Text style={[styles.font, styles.SeatReservation]}>จองที่นั่ง หอสมุดป๋วย</Text>
             </TouchableOpacity>
           </View>
@@ -46,25 +47,32 @@ const RoomBooking = () => {
       <ScrollView style={styles.main}>
         <View style={styles.wrapper}>
           <Card
-            imageSource={require('../img/dorm1.png')}
+            imageSource={require('../img/dorm1.png')} 
             name="Study Room 1"
             location="Rangsit Campus"
-            library="Puey Ungpakorn Libary"
+            library="Puey Ungpakorn Library"
             floor="Fl.1"
             timings={[
               { time: '09:00 - 12:00', status: 'OPEN' },
-              { time: '12:00 - 15:00', status: 'NOT' },
-              { time: '15:00 - 18:00', status: 'NOT' },
-              { time: '18:00 - 21:00', status: 'Not' },
-              { time: 'CLOSED', status: 'CLOSED' }
+              { time: '12:00 - 15:00', status: 'IDLE' },
+              { time: '15:00 - 18:00', status: 'IDLE' },
+              { time: '18:00 - 21:00', status: 'IDLE' },
+              { time: 'CLOSED', status: 'CLOSED' },
             ]}
-            amenities={['TV Standard', 'Marker Libary of things', 'HDMI Libary of things', 'WIFI Support']}
+            amenities={[
+              { icon: require('../img/svg/Frame.svg'), text: 'TV Standard' }, 
+              { icon: require('../img/svg/marker.svg'), text: 'Marker Library of things' },
+              { icon: require('../img/svg/cable.svg'), text: 'HDMI Library of things' },
+              { icon: require('../img/svg/wifi.svg'), text: 'WIFI Support' },
+            ]}
             capacity="6-16"
           />
           {/* Add more Card components here for additional study rooms */}
         </View>
       </ScrollView>
     </View>
+    </ScrollView>
+    
   );
 }
 
@@ -92,7 +100,7 @@ const Card = ({ imageSource, name, location, library, floor, timings, amenities,
       <View style={styles.content}>
         {amenities.map((item, index) => (
           <View key={index} style={styles.inOf}>
-            <Image source={require(item.icon)} style={styles.icon} />
+            <Image source={item.icon} style={styles.icon} />
             <Text style={styles.font}>{item.text}</Text>
           </View>
         ))}
@@ -111,48 +119,64 @@ const styles = StyleSheet.create({
   },
   font: {
     fontFamily: 'Imprima',
+    fontWeight: '400',
+    fontStyle: 'normal',
   },
-  header: {
-    paddingTop: 42,
-    paddingLeft: 25,
-  },
+  header: {},
   mainText: {
     color: '#C3002F',
     fontSize: 40,
+    paddingLeft: 25,
+    paddingTop: 42,
+    margin: 0,
   },
   miniText: {
     color: 'black',
     fontSize: 30,
+    paddingLeft: 25,
+    margin: 0,
   },
-  nav: {
-    marginTop: 20,
-  },
+  nav: {},
   wrapper: {
     marginHorizontal: 20,
   },
   tabMenu: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
+    marginTop: 11,
+    display: 'grid',
+  },
+  tab: {
+    backgroundColor: 'rgba(243, 243, 243, 1)',
+    borderRadius: 10,
+    width: 100,
+    height: 50,
+    border: 'none',
+    boxShadow: '1px 1px 1px 1px #919191',
   },
   Rangsit: {
     backgroundColor: '#FFDFAE',
+    color: '#C3002F',
+    fontSize: 15,
   },
   ThaPrahanm: {
     backgroundColor: 'rgba(243, 243, 243, 1)',
+    color: 'black',
+    fontSize: 15,
   },
   Lampang: {
     backgroundColor: 'rgba(243, 243, 243, 1)',
+    color: 'black',
+    fontSize: 15,
   },
   Puey: {
     backgroundColor: '#ffef95',
+    color: '#C3002F',
+    fontSize: 12,
+    boxShadow: '1px 1px 2px #888888',
   },
   SKR: {
     fontSize: 9,
   },
-  CoLearning: {
-  },
+  CoLearning: {},
   Multimedia: {
     fontSize: 11,
   },
@@ -162,47 +186,62 @@ const styles = StyleSheet.create({
   SeatReservation: {
     fontSize: 11,
   },
+  main: {
+    marginTop: 20,
+    paddingBottom: 100,
+  },
+  cardWrapper: {
+    margin: '0px 8px',
+    backgroundColor: '#EAECF3',
+    padding: '2px 2px',
+  },
   card: {
     borderWidth: 1,
     borderColor: '#ffffff',
     borderRadius: 1,
     backgroundColor: 'white',
-    marginVertical: 10,
+    display: 'grid',
+    gridTemplateRows: '1fr 1fr',
+    height: 110,
   },
   top: {
-    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    display: 'grid',
+    gridTemplateColumns: '1fr 10fr',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: '#ffffff',
   },
   image: {
     height: 50,
-    alignSelf: 'center',
+    justifySelf: 'center',
   },
   content: {
-    flex: 1,
-    marginLeft: 10,
+    paddingLeft: 2,
+    display: 'flex',
   },
   nameRoom: {
+    alignSelf: 'center',
     fontSize: 15,
-    fontWeight: '900',
+    fontWeight: 'bold',
     marginBottom: 2,
   },
   at: {
-    flexDirection: 'row',
+    display: 'flex',
     alignItems: 'center',
+    marginTop: 4,
   },
   period: {
-    flexDirection: 'row',
     marginTop: 4,
+    display: 'flex',
   },
   button: {
     backgroundColor: '#e06169',
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 3,
     borderRadius: 2,
-    padding: 3,
+    padding: '3px 3px',
   },
   NOT: {
     backgroundColor: '#e06169',
@@ -214,13 +253,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#bfbfbf',
   },
   down: {
-    padding: 10,
+    marginTop: 6,
+    padding: '0px 10px',
     borderTopWidth: 0.5,
     borderTopColor: '#888888',
     paddingTop: 8,
   },
   inOf: {
-    flexDirection: 'row',
+    display: 'flex',
     alignItems: 'center',
   },
   icon: {
