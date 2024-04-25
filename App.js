@@ -11,6 +11,8 @@ import Class from './app/Class/Class.js';
 import HomeCard from './app/Card/HomeCard.js'
 import DormCard from './app/Card/DormCard.js';
 import LibraryCard from './app/Card/LibraryCard.js';
+import RoomBooking from './app/Reserve/RoomBooking.js';
+import ComplainCard from './app/Card/ComplainCard.js';
 
 //Screen names
 const homeName = "Home";
@@ -29,6 +31,7 @@ export default function App() {
         <Stack.Screen name='HealthCard' component={HealthCard} />
         <Stack.Screen name='LibraryCard' component={LibraryCard} />
         <Stack.Screen name='DormCard' component={DormCard} />
+        <Stack.Screen name='ComplainCard' component={ComplainCard} />
       </Stack.Navigator>
     </NavigationContainer>
   );

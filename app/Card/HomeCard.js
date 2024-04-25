@@ -24,17 +24,17 @@ const HomeCard = ({ navigation }) => {
                         <View style={[styles.itemBackground, { backgroundColor: '#dff5ff' }]} />
                         <Text style={styles.itemTitle}>Reservation</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={navigation.navigate('LibraryCard')}>
                         <Image source={require('../img/library.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fae7f3' }]} />
                         <Text style={styles.itemTitle}>Library</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={navigation.navigate('DormCard')}>
                         <Image source={require('../img/dorm.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#ffe7e1' }]} />
                         <Text style={styles.itemTitle}>Dormitory</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={navigation.navigate('ComplainCard')}>
                         <Image source={require('../img/party.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#f1eaff' }]} />
                         <Text style={styles.itemTitle}>Complain</Text>
