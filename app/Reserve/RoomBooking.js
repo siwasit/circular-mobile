@@ -151,6 +151,7 @@ const styles = {
   studyRoomList: {
     height: 400,
     weight: '100%',
+    left: '50%',
   },
 
   //card styles
