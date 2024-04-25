@@ -22,7 +22,7 @@ const ComplainForm = () => {
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.enrollContainer}>
                     <TouchableOpacity onPress={openModal}>
-                        <Text style={styles.openButton}>Open Modal</Text>
+                        <Text style={styles.openButton}>Complain</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

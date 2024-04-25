@@ -22,6 +22,15 @@ import Schedule from './app/Study/Schedule.js'
 import Transcript from './app/Study/Transcipt.js'
 import Inform from './app/Study/Inform.js'
 
+import MentalHealth from './app/Health/MentalHealth.js'
+
+import BookBooking from './app/Books/BookBooking.js'
+import MyBooking from './app/Books/MyBooking.js'
+import BookTracking from './app/Books/BookTracking.js'
+
+import ComplainForm from './app/Complain/ComplainForm.js'
+import ComplainStatus from './app/Complain/ComplainStatus.js'
+
 //Screen names
 const homeName = "Home";
 const profilesName = "Profile";
@@ -35,19 +44,29 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name='Home' component={HomeTab}/>
-        <Stack.Screen name='EnrollCard' component={EnrollCard} />
-        <Stack.Screen name='HealthCard' component={HealthCard} />
-        <Stack.Screen name='LibraryCard' component={LibraryCard} />
-        <Stack.Screen name='ReserveCard' component={ReserveCard} />
-        <Stack.Screen name='DormCard' component={DormCard} />
-        <Stack.Screen name='ComplainCard' component={ComplainCard} />
-        <Stack.Screen name='TransportCard' component={TransportCard} />
+        <Stack.Screen name='Enroll Card' component={EnrollCard} />
+        <Stack.Screen name='Health Card' component={HealthCard} />
+        <Stack.Screen name='Library Card' component={LibraryCard} />
+        <Stack.Screen name='Reserve Card' component={ReserveCard} />
+        <Stack.Screen name='Dorm Card' component={DormCard} />
+        <Stack.Screen name='Complain Card' component={ComplainCard} />
+        <Stack.Screen name='Transport Card' component={TransportCard} />
 
         <Stack.Screen name='Enroll' component={Enroll} />
         <Stack.Screen name='Exam' component={Exam} />
         <Stack.Screen name='Schedule' component={Schedule} />
         <Stack.Screen name='Transcript' component={Transcript} />
         <Stack.Screen name='Inform' component={Inform} />
+
+        <Stack.Screen name='Mental Health' component={MentalHealth} />
+
+        <Stack.Screen name='Book Booking' component={BookBooking} />
+        <Stack.Screen name='My Booking' component={MyBooking} />
+        <Stack.Screen name='Book Tracking' component={BookTracking} />
+
+        <Stack.Screen name='Complain Form' component={ComplainForm} />
+        <Stack.Screen name='Complain Status' component={ComplainStatus} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

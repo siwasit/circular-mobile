@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StatusBar, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import MyBookList from '../Card/MyBookList';
+import MyBookList from '../Books/MyBookList';
 
 const MyBooking = ({ navigation }) => {
     return (

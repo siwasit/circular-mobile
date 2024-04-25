@@ -6,17 +6,17 @@ const LibraryCard = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <View style={styles.coursesBox}>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Book Booking')}>
                         <Image source={require('../img/enroll.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fffbda' }]} />
                         <Text style={styles.itemTitle}>Book Booking</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('My Booking')}>
                         <Image source={require('../img/health.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#ffcdea' }]} />
                         <Text style={styles.itemTitle}>My Booking</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Book Tracking')}>
                         <Image source={require('../img/exam.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#dff5ff' }]} />
                         <Text style={styles.itemTitle}>Book Tracking</Text>

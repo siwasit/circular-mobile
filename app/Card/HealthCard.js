@@ -6,12 +6,7 @@ const HealthCard = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <View style={styles.coursesBox}>
-                    <TouchableOpacity style={styles.coursesItem}>
-                        <Image source={require('../img/enroll.png')} style={styles.itemImage} />
-                        <View style={[styles.itemBackground, { backgroundColor: '#fffbda' }]} />
-                        <Text style={styles.itemTitle}>Body Health</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Mental Health')}>
                         <Image source={require('../img/health.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#ffcdea' }]} />
                         <Text style={styles.itemTitle}>Mental Health</Text>
