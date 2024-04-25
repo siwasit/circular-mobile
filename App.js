@@ -4,18 +4,20 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeCard from './app/Card/HomeCard';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ProfileScreen from './app/Profiles/ProfileScreen';
+
+import EnrollCard from './app/Card/EnrollCard'
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <HomeCard />
-      <Tab.Navigator>
-        <Tab.Screen name='Home' component={HomeCard} />
-        <Tab.Screen name='Profile' component={ProfileScreen} />
-      </Tab.Navigator>
+      <Stack.Navigator>
+        <HomeCard />
+        <Stack.Screen name='Home' component={HomeCard} />
+        <Stack.Screen name='Enroll' component={EnrollCard} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
