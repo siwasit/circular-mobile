@@ -21,7 +21,7 @@ const ReserveCard = ({ navigation }) => {
                         <View style={[styles.itemBackground, { backgroundColor: '#dff5ff' }]} />
                         <Text style={styles.itemTitle}>Exercise Room Booking</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('My Booking')}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Booking')}>
                         <Image source={require('../img/party.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#f1eaff' }]} />
                         <Text style={styles.itemTitle}>My Booking</Text>

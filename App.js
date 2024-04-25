@@ -34,6 +34,7 @@ import ComplainStatus from './app/Complain/ComplainStatus.js'
 import RoomBooking from './app/Reserve/RoomBooking.js'
 import ExerciseBooking from './app/Reserve/ExerciseBooking.js';
 import EntBooking from './app/Reserve/EntBooking.js'
+import Booking from './app/Reserve/Booking.js';
 
 import PublicBus from './app/Transportation/PublicBus.js';
 import CampusBus from './app/Transportation/CampusBus.js';
@@ -80,6 +81,7 @@ export default function App() {
         <Stack.Screen name='Room Booking' component={RoomBooking} />
         <Stack.Screen name='Entertainment' component={EntBooking} />
         <Stack.Screen name='Exercise' component={ExerciseBooking} />
+        <Stack.Screen name='Booking' component={Booking} />
 
       </Stack.Navigator>
     </NavigationContainer>
