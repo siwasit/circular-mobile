@@ -20,7 +20,7 @@ const RoomBooking = () => {
       image: require('../img/dorm1.png'), 
       name: 'Study Room 1',
       campus: 'Rangsit Campus',
-      location: 'Puey\nUngpakorn\nLibary',
+      location: 'Puey Ungpakorn Libary',
       floor: 'Fl.1',
       features: [
         { icon: faTv, text: 'TV (Standard)' },
@@ -114,7 +114,7 @@ const RoomBooking = () => {
       </ScrollView>
 
       <View style={styles.footer}>
-        <Text style={styles.footerText}>KMUTT Library &copy; 2024</Text>
+        <Text style={styles.footerText}>Circular &copy; 2024</Text>
       </View>
     </View>
   );
@@ -193,8 +193,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   cardDetails: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     marginTop: 5,
+    flexWrap: 'wrap',
   },
   cardDetail: {
     marginRight: 10,
