@@ -127,19 +127,18 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 15,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd', // Light gray border
   },
   headerMain: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    color: '#C3002F',
+    fontSize: 40,
   },
   headerMini: {
-    fontSize: 16,
-    color: '#888', // Light gray text
+    color: 'black',
+    fontSize: 30,
   },
   nav: {
     padding: 10,
@@ -199,6 +198,8 @@ const styles = StyleSheet.create({
   },
   cardDetail: {
     marginRight: 10,
+    flexDirection: 'row',
+    marginTop: 5,
   },
   cardDetailIcon: {
     fontSize: 16,

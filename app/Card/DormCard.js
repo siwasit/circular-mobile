@@ -6,7 +6,7 @@ const DormCard = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <View style={styles.coursesBox}>
-                    <TouchableOpacity style={styles.coursesItem} onPress={navigation.navigate()}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={navigation.navigate('Dorm Booking')}>
                         <Image source={require('../img/enroll.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fffbda' }]} />
                         <Text style={styles.itemTitle}>Dorm Booking</Text>
