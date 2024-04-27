@@ -1,279 +1,273 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Button, 
+  ScrollView
+} from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faMarker, faTv, faLaptop, faWifi } from '@fortawesome/free-solid-svg-icons';
 
 const RoomBooking = () => {
+  const [campus, setCampus] = useState('Rangsit');
+  const [location, setLocation] = useState('Puey Ungpakorn Libary');
+
+  const rooms = [
+    {
+      id: 1,
+      image: require('../img/dorm1.png'), 
+      name: 'Study Room 1',
+      campus: 'Rangsit Campus',
+      location: 'Puey\nUngpakorn\nLibary',
+      floor: 'Fl.1',
+      features: [
+        { icon: faTv, text: 'TV (Standard)' },
+        { icon: faMarker, text: 'Marker (Libary of things)' },
+        { icon: faLaptop, text: 'HDMI (Libary of things)' },
+        { icon: faWifi, text: 'WIFI (Support)' },
+      ],
+      capacity: '6-16',
+      timeSlots: [
+        { time: '09:00 - 12:00', status: 'OPEN' },
+        { time: '12:00 - 15:00', status: 'NOT' },
+        { time: '15:00 - 18:00', status: 'NOT' },
+        { time: '18:00 - 21:00', status: 'NOT' },
+        { time: 'CLOSED', status: 'CLOSED' },
+      ],
+    },
+    // Add more room data here
+  ];
+
+  const handleCampusChange = (newCampus) => setCampus(newCampus);
+  const handleLocationChange = (newLocation) => setLocation(newLocation);
+
   return (
-    <ScrollView>
-      <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={[styles.font, styles.mainText]}>Study Room 🛌</Text>
-        <Text style={[styles.font, styles.miniText]}>จองห้องติว</Text>
-      </View>
-      <View style={styles.nav}>
-        <View style={styles.wrapper}>
-          <View style={styles.tabMenu}>
-            <TouchableOpacity style={styles.tab}>
-              <Text style={[styles.font, styles.Rangsit]}>Rangsit</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tab}>
-              <Text style={[styles.font, styles.ThaPrahanm]}>Tha Prahanm</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tab}>
-              <Text style={[styles.font, styles.Lampang]}>Lampang</Text>
-            </TouchableOpacity>
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.header}>
+          <Text style={styles.headerMain}>Study Room </Text>
+          <Text style={styles.headerMini}>จองห้องติว</Text>
+        </View>
+
+        <View style={styles.nav}>
+          <View style={styles.navCampus}>
+            <Button title="Rangsit Campus" onPress={() => handleCampusChange('Rangsit')} />
+            <Button title="Tha Prahanm Campus" onPress={() => handleCampusChange('Tha Prahanm')} />
+            <Button title="Lampang Campus" onPress={() => handleCampusChange('Lampang')} />
           </View>
-          <View style={styles.tabMenu}>
-            <TouchableOpacity style={styles.tab}>
-              <Text style={[styles.font, styles.Puey]}>Puey Ungpakorn</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tab}>
-              <Text style={[styles.font, styles.SKR]}>ศูนย์การเรียนรู้กรมหลวงนราธิวาสราชนครินทร์</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tab}>
-              <Text style={[styles.font, styles.CoLearning]}>Co-Learning</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tab}>
-              <Text style={[styles.font, styles.Multimedia]}>Multimedia Lab</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tab}>
-              <Text style={[styles.font, styles.NongyaoChaiseri]}>Nongyao Chaiseri Libary</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tab}>
-              <Text style={[styles.font, styles.SeatReservation]}>จองที่นั่ง หอสมุดป๋วย</Text>
-            </TouchableOpacity>
+          <View style={styles.navLocation}>
+            <Button title="Puey Ungpakorn" onPress={() => setLocation('Puey Ungpakorn')} />
+            {/* Add more location buttons here */}
           </View>
         </View>
-      </View>
-      <ScrollView style={styles.main}>
-        <View style={styles.wrapper}>
-          <Card
-            imageSource={require('../img/dorm1.png')} 
-            name="Study Room 1"
-            location="Rangsit Campus"
-            library="Puey Ungpakorn Library"
-            floor="Fl.1"
-            timings={[
-              { time: '09:00 - 12:00', status: 'OPEN' },
-              { time: '12:00 - 15:00', status: 'IDLE' },
-              { time: '15:00 - 18:00', status: 'IDLE' },
-              { time: '18:00 - 21:00', status: 'IDLE' },
-              { time: 'CLOSED', status: 'CLOSED' },
-            ]}
-            amenities={[
-              { icon: require('../img/svg/Frame.svg'), text: 'TV Standard' }, 
-              { icon: require('../img/svg/marker.svg'), text: 'Marker Library of things' },
-              { icon: require('../img/svg/cable.svg'), text: 'HDMI Library of things' },
-              { icon: require('../img/svg/wifi.svg'), text: 'WIFI Support' },
-            ]}
-            capacity="6-16"
-          />
-          {/* Add more Card components here for additional study rooms */}
+
+        <View style={styles.main}>
+          <ScrollView style={styles.cardWrapper}>
+            {rooms.map((room) => (
+              <View key={room.id} style={styles.card}>
+                <View style={styles.cardTop}>
+                  <Image source={room.image} style={styles.cardImage} />
+                  <View style={styles.cardContent}>
+                    <Text style={styles.cardName}>{room.name}</Text>
+                    <View style={styles.cardDetails}>
+                      <View style={styles.cardDetail}>
+                        <FontAwesomeIcon icon={faMarker} style={styles.cardDetailIcon} />
+                        <Text style={styles.cardDetailText}>{room.campus}</Text>
+                      </View>
+                      <View style={styles.cardDetail}>
+                        <FontAwesomeIcon icon={faTv} style={styles.cardDetailIcon} />
+                        <Text style={styles.cardDetailText}>{room.location}</Text>
+                      </View>
+                      <View style={styles.cardDetail}>
+                        <FontAwesomeIcon icon={faWifi} style={styles.cardDetailIcon} />
+                        <Text style={styles.cardDetailText}>{room.floor}</Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.cardBottom}>
+                  <View style={styles.cardFeatures}>
+                    {room.features.map((feature) => (
+                      <View key={feature.text} style={styles.cardFeature}>
+                        <FontAwesomeIcon icon={feature.icon} style={styles.cardFeatureIcon} />
+                        <Text style={styles.cardFeatureText}>{feature.text}</Text>
+                      </View>
+                    ))}
+                  </View>
+                  <View style={styles.cardCapacity}>
+                    <Text style={styles.cardCapacityText}>Capacity: {room.capacity}</Text>
+                  </View>
+                  <View style={styles.cardTimeslots}>
+                    {room.timeSlots.map((slot) => (
+                      <View key={slot.time} style={styles.cardTimeslot}>
+                        <Text style={slot.status === 'OPEN' ? styles.cardTimeslotOpen : styles.cardTimeslotClosed}>{slot.time}</Text>
+                      </View>
+                    ))}
+                  </View>
+                </View>
+              </View>
+            ))}
+          </ScrollView>
         </View>
       </ScrollView>
-    </View>
-    </ScrollView>
-    
-  );
-}
 
-const Card = ({ imageSource, name, location, library, floor, timings, amenities, capacity }) => (
-  <View style={styles.card}>
-    <View style={styles.top}>
-      <Image source={imageSource} style={styles.image} />
-      <View style={styles.content}>
-        <Text style={[styles.font, styles.nameRoom]}>{name}</Text>
-        <View style={styles.at}>
-          <Text style={styles.font}>{location}</Text>
-          <Text style={styles.font}>{library}</Text>
-          <Text style={styles.font}>{floor}</Text>
-        </View>
-        <View style={styles.period}>
-          {timings.map((item, index) => (
-            <TouchableOpacity key={index} style={[styles.button, styles[item.status.toLowerCase()]]}>
-              <Text style={styles.font}>{item.time}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>KMUTT Library &copy; 2024</Text>
       </View>
     </View>
-    <View style={styles.down}>
-      <View style={styles.content}>
-        {amenities.map((item, index) => (
-          <View key={index} style={styles.inOf}>
-            <Image source={item.icon} style={styles.icon} />
-            <Text style={styles.font}>{item.text}</Text>
-          </View>
-        ))}
-        <View style={styles.inOf}>
-          <Text style={[styles.font, styles.num]}>{capacity}</Text>
-        </View>
-      </View>
-    </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#fff', // White background
   },
-  font: {
-    fontFamily: 'Imprima',
-    fontWeight: '400',
-    fontStyle: 'normal',
+  header: {
+    padding: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd', // Light gray border
   },
-  header: {},
-  mainText: {
-    color: '#C3002F',
-    fontSize: 40,
-    paddingLeft: 25,
-    paddingTop: 42,
-    margin: 0,
+  headerMain: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
-  miniText: {
-    color: 'black',
-    fontSize: 30,
-    paddingLeft: 25,
-    margin: 0,
+  headerMini: {
+    fontSize: 16,
+    color: '#888', // Light gray text
   },
-  nav: {},
-  wrapper: {
-    marginHorizontal: 20,
+  nav: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd', // Light gray border
   },
-  tabMenu: {
-    marginTop: 11,
-    display: 'grid',
+  navCampus: {
+    flexDirection: 'row',
   },
-  tab: {
-    backgroundColor: 'rgba(243, 243, 243, 1)',
-    borderRadius: 10,
-    width: 100,
-    height: 50,
-    border: 'none',
-    boxShadow: '1px 1px 1px 1px #919191',
+  navLocation: {
+    marginTop: 10,
   },
-  Rangsit: {
-    backgroundColor: '#FFDFAE',
-    color: '#C3002F',
-    fontSize: 15,
+  navButton: {
+    flex: 1,
+    margin: 5,
   },
-  ThaPrahanm: {
-    backgroundColor: 'rgba(243, 243, 243, 1)',
-    color: 'black',
-    fontSize: 15,
-  },
-  Lampang: {
-    backgroundColor: 'rgba(243, 243, 243, 1)',
-    color: 'black',
-    fontSize: 15,
-  },
-  Puey: {
-    backgroundColor: '#ffef95',
-    color: '#C3002F',
-    fontSize: 12,
-    boxShadow: '1px 1px 2px #888888',
-  },
-  SKR: {
-    fontSize: 9,
-  },
-  CoLearning: {},
-  Multimedia: {
-    fontSize: 11,
-  },
-  NongyaoChaiseri: {
-    fontSize: 11,
-  },
-  SeatReservation: {
-    fontSize: 11,
+  navButtonActive: {
+    backgroundColor: '#ddd', // Light gray background for active button
   },
   main: {
-    marginTop: 20,
-    paddingBottom: 100,
-  },
-  cardWrapper: {
-    margin: '0px 8px',
-    backgroundColor: '#EAECF3',
-    padding: '2px 2px',
-  },
-  card: {
-    borderWidth: 1,
-    borderColor: '#ffffff',
-    borderRadius: 1,
-    backgroundColor: 'white',
-    display: 'grid',
-    gridTemplateRows: '1fr 1fr',
-    height: 110,
-  },
-  top: {
-    backgroundColor: '#ffffff',
-    display: 'grid',
-    gridTemplateColumns: '1fr 10fr',
-    alignItems: 'center',
+    flex: 1,
     padding: 10,
   },
-  image: {
-    height: 50,
-    justifySelf: 'center',
+  cardWrapper: {
+    marginBottom: 20,
   },
-  content: {
-    paddingLeft: 2,
-    display: 'flex',
+  card: {
+    backgroundColor: '#fff', // White background for card
+    borderRadius: 5,
+    shadowColor: '#ddd', // Light gray shadow
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 1, // Add some elevation for card
+    marginBottom: 10,
   },
-  nameRoom: {
-    alignSelf: 'center',
-    fontSize: 15,
+  cardTop: {
+    flexDirection: 'row',
+    padding: 10,
+  },
+  cardImage: {
+    width: 100,
+    height: 100,
+    marginRight: 10,
+  },
+  cardContent: {
+    flex: 1,
+  },
+  cardName: {
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 2,
   },
-  at: {
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: 4,
+  cardDetails: {
+    flexDirection: 'row',
+    marginTop: 5,
   },
-  period: {
-    marginTop: 4,
-    display: 'flex',
+  cardDetail: {
+    marginRight: 10,
   },
-  button: {
-    backgroundColor: '#e06169',
-    display: 'flex',
+  cardDetailIcon: {
+    fontSize: 16,
+    color: '#aaa', // Light gray icon color
+  },
+  cardDetailText: {
+    marginLeft: 5,
+  },
+  cardBottom: {
+    padding: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#ddd', // Light gray border
+  },
+  cardFeatures: {
+    marginBottom: 5,
+  },
+  cardFeature: {
+    flexDirection: 'row',
+    marginBottom: 3,
+  },
+  cardFeatureIcon: {
+    fontSize: 14,
+    color: '#aaa', // Light gray icon color
+    marginRight: 5,
+  },
+  cardFeatureText: {
+    fontSize: 14,
+  },
+  cardCapacity: {
+    marginBottom: 5,
+  },
+  cardCapacityText: {
+    fontSize: 14,
+  },
+  cardTimeslots: {
+    flexDirection: 'row',
+    flexWrap: 'wrap', // Allow timeslots to wrap to next line
+  },
+  cardTimeslot: {
+    marginRight: 10,
+    marginBottom: 5,
+    padding: 5,
+    borderRadius: 5,
+  },
+  cardTimeslotOpen: {
+    backgroundColor: '#aae0ff', 
+    color: '#000', 
+    padding: 2,
+    borderRadius: 20,
+  },
+  cardTimeslotClosed: {
+    backgroundColor: '#ddd', // Light gray for closed slots
+    color: '#888', // Light gray text
+    padding: 2,
+    borderRadius: 20,
+  },
+  footer: {
+    padding: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#ddd', 
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 3,
-    borderRadius: 2,
-    padding: '3px 3px',
   },
-  NOT: {
-    backgroundColor: '#e06169',
+  footerText: {
+    fontSize: 12,
+    color: '#aaa', 
   },
-  OPEN: {
-    backgroundColor: '#45d84c',
-  },
-  CLOSED: {
-    backgroundColor: '#bfbfbf',
-  },
-  down: {
-    marginTop: 6,
-    padding: '0px 10px',
-    borderTopWidth: 0.5,
-    borderTopColor: '#888888',
-    paddingTop: 8,
-  },
-  inOf: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  icon: {
-    height: 10,
-  },
-  num: {
-    color: '#d84a45',
-    padding: 2.5,
-    backgroundColor: '#ffdcfa',
-    borderRadius: 5,
-    fontSize: 8.3,
+  navButtonInactive: {
+    backgroundColor: '#f5f5f5', 
   },
 });
 
-
-export default RoomBooking
+export default RoomBooking;
