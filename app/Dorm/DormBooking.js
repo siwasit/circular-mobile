@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet} from 'react-native';
+import ServiceScreen from './ServiceScreen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const DormBooking = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.statusBar} />
       <View style={styles.statusBar} />
 
       <View style={styles.header}>
@@ -13,12 +14,12 @@ const DormBooking = () => {
       </View>
 
       <View style={styles.tabMenu}>
-        <Button title="บริการ" onPress={() => {}} style={styles.serviceButton} />
-        <Button title="หอพัก" onPress={() => {}} style={styles.dormButton} />
+        <TouchableOpacity title="บริการ" onPress={() => {}} style={styles.serviceButton} />
+        <TouchableOpacity title="หอพัก" onPress={() => {}} style={styles.dormButton} />
       </View>
 
       <View style={styles.content}>
-        <Image source={require('../img/dorm/image 26.png')} style={styles.contentImage} />
+        <ServiceScreen />
       </View>
     </View>
   );
@@ -55,8 +56,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(243, 243, 243, 1)',
     borderRadius: 50,
-    margin: 10,
-    height: 50,
+    margin: 5,
+    height: 40,
   },
   serviceButton: {
     backgroundColor: 'rgba(243, 243, 243, 1)',
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
   },
   contentImage: {
     width: '100%',
-    resizeMode: 'contain', // Adjust resize mode as needed
+    resizeMode: 'contain',
   },
 });
 
