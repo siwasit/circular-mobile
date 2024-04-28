@@ -53,9 +53,9 @@ const RoomBooking = () => {
 
         <View style={styles.nav}>
           <View style={styles.navCampus}>
-            <Button title="Rangsit Campus" onPress={() => handleCampusChange('Rangsit')} />
-            <Button title="Tha Prahanm Campus" onPress={() => handleCampusChange('Tha Prahanm')} />
-            <Button title="Lampang Campus" onPress={() => handleCampusChange('Lampang')} />
+            <Button title="Rangsit Campus" onPress={() => handleCampusChange('Rangsit')} style={styles.navCard}/>
+            <Button title="Tha Prahanm Campus" onPress={() => handleCampusChange('Tha Prahanm')} style={styles.navCard} />
+            <Button title="Lampang Campus" onPress={() => handleCampusChange('Lampang')} style={styles.navCard} />
           </View>
           <View style={styles.navLocation}>
             <Button title="Puey Ungpakorn" onPress={() => setLocation('Puey Ungpakorn')} />
@@ -143,10 +143,11 @@ const styles = StyleSheet.create({
   nav: {
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd', // Light gray border
+    borderBottomColor: '#ddd',
   },
   navCampus: {
     flexDirection: 'row',
+    fontSize: 10,
   },
   navLocation: {
     marginTop: 10,
@@ -155,8 +156,13 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 5,
   },
+  navCard: {
+    borderRadius: 20,
+    width: 40,
+    
+  },
   navButtonActive: {
-    backgroundColor: '#ddd', // Light gray background for active button
+    backgroundColor: '#ddd', 
   },
   main: {
     flex: 1,

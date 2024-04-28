@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#dffbff',
     padding: 5,
     borderRadius: 5,
+    zIndex: 1,
   },
   confirmText: {
     fontSize: 12,
@@ -93,7 +94,9 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 70,
-    borderRadius: 100,
+    width: 380,
+    height: 85,
+    marginTop: -20,
   },
   detail: {
     marginLeft: 10,

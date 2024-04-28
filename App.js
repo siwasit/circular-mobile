@@ -40,6 +40,7 @@ import PublicBus from './app/Transportation/PublicBus.js';
 import CampusBus from './app/Transportation/CampusBus.js';
 
 import DormBooking from './app/Dorm/DormBooking.js';
+import DormInfo from './app/Dorm/DormInfo.js';
 
 //Screen names
 const homeName = "Home";
@@ -86,7 +87,7 @@ export default function App() {
         <Stack.Screen name='Booking' component={Booking} />
 
         <Stack.Screen name='Dorm Booking' component={DormBooking} />
-
+        <Stack.Screen name='Dorm Info' component={DormInfo} />
 
       </Stack.Navigator>
     </NavigationContainer>

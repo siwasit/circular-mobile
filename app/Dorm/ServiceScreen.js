@@ -27,6 +27,9 @@ const ServiceScreen = () => {
         itemWidth={300}
       />
       <Text style={styles.servicesText}>Our Services</Text>
+      <View style={styles.gridContainer}>
+        
+      </View>
       <View style={styles.updatesContainer}>
         {hasUpdates ? (
           <>
@@ -49,23 +52,38 @@ const ServiceScreen = () => {
 const styles = StyleSheet.create({
   imageSliderContainer: {
     marginBottom: 20,
+    width: '100%',
+    alignItems: 'center',
   },
   sliderImage: {
     width: '100%',
-    height: 200, // Adjust height as needed
+    height: 200, 
   },
   servicesText: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'left',
-    marginBottom: 200,
+    paddingBottom: 220,
+    marginLeft: -190,
+    paddingTop: 20,
   },
   updatesContainer: {
     alignItems: 'center',
+    width: '100%',
+    flexDirection: 'row',
   },
   updatesTitle: {
     fontSize: 18,
     marginBottom: 5,
+  },
+  gridContainer: {
+    width: '80%',
+    backgroundColor: 'lightgray',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    display: 'grid',
   },
   viewAllButton: {
     backgroundColor: '#eee',
