@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.headerImage}>
                     <View style={styles.firstImage}>
-                        <Image source={require('./img/img-1.png')} style={styles.image1} />
+                        <Image source={require('../img/img-1.png')} style={styles.image1} />
                     </View>
                     <View style={styles.secondImage}>
-                        <Image source={require('./img/img-2.png')} style={styles.image2} />
+                        <Image source={require('../img/img-2.png')} style={styles.image2} />
                     </View>
                 </View>
             </View>
@@ -27,18 +27,18 @@ const SignUp = () => {
                             placeholder="Email or username"
                             placeholderTextColor="#444"
                         />
-                        <Image source={require('./img/user.png')} style={styles.inputIcon} />
+                        <Image source={require('../img/user.png')} style={styles.inputIcon} />
                         <TextInput
                             style={styles.input}
                             placeholder="Password"
                             placeholderTextColor="#444"
                             secureTextEntry={true}
                         />
-                        <Image source={require('./img/password.png')} style={styles.passwordIcon} />
+                        <Image source={require('../img/password.png')} style={styles.passwordIcon} />
                         <TouchableOpacity>
                             <Text style={styles.forgotPassword}>Forgot password?</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.loginButton}>
+                        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Log in')}>
                             <Text style={styles.loginButtonText}>Login Now</Text>
                         </TouchableOpacity>
                     </View>

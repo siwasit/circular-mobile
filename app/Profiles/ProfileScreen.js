@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faListUl, faCalendar, faGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -50,28 +51,30 @@ const ProfileScreen = () => {
 
                 <View style={styles.detailsContainer}>
                     <View style={styles.bottomDetailTab}>
-                        <Image style={styles.detailIcon} />
+                        <FontAwesomeIcon icon={faListUl} style={styles.detailIcon} />
                         <Text style={styles.detailName}>PAYMENT LIST</Text>
                         <Image style={styles.detailArrow} />
                     </View>
                     <View style={styles.line} />
                     <View style={styles.bottomDetailTab}>
-                        <Image style={styles.detailIcon} />
+                        <FontAwesomeIcon icon={faCalendar} style={styles.detailIcon} />
                         <Text style={styles.detailName}>CALENDAR</Text>
                         <Image style={styles.detailArrow} />
                     </View>
                 </View>
                 <View style={styles.detailsContainer}>
                     <View style={styles.bottomDetailTab}>
-                        <Image style={styles.detailIcon} />
+                        <FontAwesomeIcon icon={faGear} style={styles.detailIcon} />
                         <Text style={styles.detailName}>SETTING</Text>
                         <Image style={styles.detailArrow} />
                     </View>
                     <View style={styles.line} />
                     <View style={styles.bottomDetailTab}>
-                        <Image style={styles.detailIcon} />
-                        <Text style={styles.detailName}>SIGN OUT</Text>
-                        <Image style={styles.detailArrow} />
+                        <TouchableOpacity onPress={() => navigation.navigate('Sign Up')} style={styles.blankButton}>
+                            <FontAwesomeIcon icon={faRightFromBracket} style={styles.detailIcon} />
+                            <Text style={styles.detailName}>SIGN OUT</Text>
+                            <Image style={styles.detailArrow} />
+                        </TouchableOpacity>
                     </View>
                 </View>
 
@@ -188,6 +191,7 @@ const styles = StyleSheet.create({
         fontSize: 8,
         fontFamily: 'Kanit',
         fontWeight: '300',
+        fontStyle: 'black',
     },
     bottom: {
         flexDirection: 'row',
@@ -225,9 +229,9 @@ const styles = StyleSheet.create({
         height: 103,
         marginTop: 12,
         marginVertical: 5,
-        bottom: '10%',
-        width: 380,
-        left: '1.1%',
+        bottom: '8%',
+        width: 350,
+        left: '4.3%',
     },
     bottomDetailTab: {
         alignItems: 'center',
@@ -236,11 +240,14 @@ const styles = StyleSheet.create({
     detailIcon: {
         height: 20,
         width: 20,
+        margin: 3,
+        top: 2,
     },
     detailName: {
         fontSize: 13,
         fontFamily: 'Kanit',
         fontWeight: '400',
+        top: 5,
     },
     detailArrow: {
         height: 15,
@@ -256,6 +263,14 @@ const styles = StyleSheet.create({
         height: 2,
         backgroundColor: '#c2c2c2',
         left: '10%',
+    },
+    blankButton: {
+        backgroundColor: '#f5dad2',
+        width: '100%',
+        textAlign: 'center',
+        alignItems: 'center',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
     }
 });
 
