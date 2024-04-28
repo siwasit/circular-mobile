@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const courses = [
     { id: 1, name: 'CN311', title: 'OPERATING SYSEMS', section: 'SECTION 760001', color: '#F37500' },
-    { id: 2, name: 'CN321', title: 'DATA COMMUN ..', section: 'SECTION 760001', color: '#d4019f' },
-    // ... Add more courses here
+    { id: 2, name: 'CN321', title: 'DATA COMMU.', section: 'SECTION 760001', color: '#d4019f' },
+    { id: 3, name: 'JP171', title: 'JAPANESE FOR BEGINNER', section: 'SECTION 760001', color: '#d4019f' },
 ];
 
 const Header = () => {
@@ -34,14 +34,16 @@ const CourseBox = ({ course }) => {
 
 const Classroom = () => {
     return (
-        <View style={styles.container}>
-            <Header />
-            <View style={styles.content}>
-                {courses.map((course) => (
-                    <CourseBox key={course.id} course={course} />
-                ))}
+        <ScrollView>
+            <View style={styles.container}>
+                <Header />
+                <View style={styles.content}>
+                    {courses.map((course) => (
+                        <CourseBox key={course.id} course={course} />
+                    ))}
+                </View>
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
