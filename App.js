@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import ProfileScreen from './app/Profiles/ProfileScreen';
-import Class from './app/Class/Class.js';
+import Classroom from './app/Class/Classroom.js';
 
 import EnrollCard from './app/Card/EnrollCard';
 import HealthCard from './app/Card/HealthCard';
@@ -125,7 +125,7 @@ function HomeTab({ navigation }) {
       <Tab.Screen name={homeName}>
         {() => <HomeCard navigation={navigation} />}
       </Tab.Screen>
-      <Tab.Screen name={className} component={Class} />
+      <Tab.Screen name={className} component={Classroom} />
       <Tab.Screen name={profilesName} component={ProfileScreen} />
 
     </Tab.Navigator>

@@ -26,7 +26,7 @@ const DormInfo = ({ navigation }) => {
 
         <View style={styles.content}>
           <View style={styles.dormCard}>
-            <Card imageSource={require('./img/dorm1.png')} title="Dormitory A" dormType="A" />
+            <Card imageSource={require('./img/dorm1.png')} title="Dormitory A" dormType="A" style={styles.cardStyle}/>
             <Card imageSource={require('./img/puay.png')} title="Dormitory B" dormType="B" />
           </View>
         </View>
@@ -143,6 +143,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     height: 'auto',
+    marginBottom: 10,
+  },
+  cardStyle: {
+    marginBottom: 10,
   },
   image: {
     width: '100%',
@@ -165,7 +169,7 @@ const styles = StyleSheet.create({
     width: '80%',
     borderRadius: 22,
     overflow: 'hidden',
-    marginBottom: 30,
+    marginBottom: 40,
   },
   tickContainer: {
     flex: 1,

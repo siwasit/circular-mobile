@@ -18,15 +18,15 @@ const SelectButton = () => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.touchableOpacity} onPress={() => onPressButton('Button 2')}>
                 <FontAwesomeIcon icon={faBroom} style={styles.icon} />
-                <Text>Cleaning</Text>
+                <Text style={styles.font}>Cleaning</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.touchableOpacity} onPress={() => onPressButton('Button 3')}>
                 <FontAwesomeIcon icon={faEnvelopesBulk} style={styles.icon} />
-                <Text>Mailing</Text>
+                <Text style={styles.font}>Mailing</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.touchableOpacity} onPress={() => onPressButton('Button 4')}>
                 <FontAwesomeIcon icon={faQrcode} style={styles.icon} />
-                <Text>Payment</Text>
+                <Text style={styles.font}>Payment</Text>
             </TouchableOpacity>
         </View>
     );
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 10, height: 10 },
     },
     font: {
-        fontSize: 15,
+        fontSize: 13,
     },
     icon: {
         width: '100%',
