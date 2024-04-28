@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel'; 
-import { faSmile } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import SelectButton from './SelectButton';
 
 
 const IMAGES = [
@@ -28,22 +27,7 @@ const ServiceScreen = () => {
       />
       <Text style={styles.servicesText}>Our Services</Text>
       <View style={styles.gridContainer}>
-        
-      </View>
-      <View style={styles.updatesContainer}>
-        {hasUpdates ? (
-          <>
-            <Text style={styles.updatesTitle}>Today's Updates</Text>
-            <TouchableOpacity onPress={handleViewAllPress} style={styles.viewAllButton}>
-              <Text style={styles.viewAllText}>View All</Text>
-            </TouchableOpacity>
-          </>
-        ) : (
-          <>
-            <FontAwesomeIcon icon={faSmile} style={styles.smileIcon} />
-            <Text style={styles.noUpdatesText}>No Updates</Text>
-          </>
-        )}
+        <SelectButton />
       </View>
     </View>
   );
