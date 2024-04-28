@@ -6,12 +6,12 @@ const DormCard = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <View style={styles.coursesBox}>
-                    <TouchableOpacity style={styles.coursesItem} onPress={navigation.navigate('Dorm Booking')}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Dorm Booking')}>
                         <Image source={require('../img/library.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#fffbda' }]} />
                         <Text style={styles.itemTitle}>Dorm Booking</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.coursesItem} onPress={navigation.navigate('Dorm Info')}>
+                    <TouchableOpacity style={styles.coursesItem} onPress={() => navigation.navigate('Dorm Info')}>
                         <Image source={require('../img/dorm.png')} style={styles.itemImage} />
                         <View style={[styles.itemBackground, { backgroundColor: '#ffcdea' }]} />
                         <Text style={styles.itemTitle}>Service</Text>

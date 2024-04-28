@@ -26,11 +26,11 @@ const BookList = () => {
   return (
     <View style={styles.container}>
       <View style={styles.bookContainer}>
-        {books.map(book => (
-          <View key={book.id} style={styles.bookCard}>
-            <Image source={book.imageUrl} style={styles.bookImage} />
-            <Text style={styles.bookTitle}>{book.title}</Text>
-            <Text style={styles.bookAuthor}>{book.author}</Text>
+        {books.map(books => (
+          <View key={books.id} style={styles.bookCard}>
+            <Image source={books.imageUrl} style={styles.bookImage} />
+            <Text style={styles.bookTitle}>{books.title}</Text>
+            <Text style={styles.bookAuthor}>{books.author}</Text>
           </View>
         ))}
       </View>
