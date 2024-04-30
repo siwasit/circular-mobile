@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Modal, StyleSheet } from 'react-native';
+import AppointmentScheduler from './AppointmentScheduler';
 
 const MentalHealth = () => {
     const [btnPosition, setBtnPosition] = useState('Chosen');
@@ -52,6 +53,8 @@ const MentalHealth = () => {
                                 placeholder="แจ้งเหตุ...."
                                 placeholderTextColor="#9B9B9B"
                             />
+
+                            <AppointmentScheduler />
 
                             <View style={styles.submit}>
                                 <TouchableOpacity onPress={() => { }} style={styles.submitButton}>
@@ -151,6 +154,7 @@ const styles = StyleSheet.create({
         height: 26,
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 30,
     },
     submitButtonText: {
         fontSize: 13,

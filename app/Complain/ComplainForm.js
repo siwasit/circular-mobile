@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
 
-const ComplainForm = () => {
+const ComplainForm = ({ navigation }) => {
     const [btnPosition, setBtnPosition] = useState('Chosen');
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -36,10 +36,10 @@ const ComplainForm = () => {
                         <Text style={[styles.font, styles.mini]}>ฟอร์มรับเรื่องร้องเรียน</Text>
 
                         <View style={styles.tabMenu}>
-                            <TouchableOpacity style={styles.buttonContainer}>
+                            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('Complain Form')}>
                                 <Text style={[styles.font, styles.complainForm]}>ฟอร์มรับเรื่อง</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.buttonContainer}>
+                            <TouchableOpacity style={styles.buttonContainer} onPress={() => { navigation.navigate('Complain Status'); closeModal(); }}>
                                 <Text style={[styles.font, styles.complainStatus]}>สถานะการร้องเรียน</Text>
                             </TouchableOpacity>
                         </View>
