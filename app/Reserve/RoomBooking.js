@@ -37,6 +37,7 @@ const RoomBooking = () => {
         { time: 'CLOSED', status: 'CLOSED' },
       ],
     },
+    
     // Add more room data here
   ];
 

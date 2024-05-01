@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F3F3F3',
         marginHorizontal: 4,
         marginBottom: 10,
+        fontWeight: 'regular',
     },
     inputContent: {
         backgroundColor: '#f3f3f3',
