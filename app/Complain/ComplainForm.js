@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
 import useSessionData from '../../useSessionData';
 
+
 const ComplainForm = ({ navigation }) => {
     const [btnPosition, setBtnPosition] = useState('Chosen');
     const [modalVisible, setModalVisible] = useState(false);
@@ -74,7 +75,7 @@ const ComplainForm = ({ navigation }) => {
                         <Text style={[styles.font, styles.mini]}>ฟอร์มรับเรื่องร้องเรียน</Text>
 
                         <View style={styles.tabMenu}>
-                            <TouchableOpacity style={styles.buttonContainer}>
+                            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('Complain Form')}>
                                 <Text style={[styles.font, styles.complainForm]}>ฟอร์มรับเรื่อง</Text>
                             </TouchableOpacity>
                             <TouchableOpacity 
@@ -211,6 +212,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F3F3F3',
         marginHorizontal: 4,
         marginBottom: 10,
+        fontWeight: 'regular',
     },
     inputContent: {
         backgroundColor: '#f3f3f3',

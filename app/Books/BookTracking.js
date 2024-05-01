@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     bookContainer: {
+        marginTop: 20,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
         width: 'auto',
     },
     bookCard: {
-        width: '52%',
+        // width: '52%',
         height: 'auto',
         backgroundColor: '#FFFFFF',
         borderRadius: 10,

@@ -195,6 +195,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 30,
+        marginBottom: 30,
     },
     submitButtonText: {
         fontSize: 13,

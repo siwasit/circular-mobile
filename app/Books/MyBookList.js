@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
     width: 'auto',
   },
   bookCard: {
-    width: '52%',
     height: 'auto',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
     marginBottom: 15,
+    marginTop: 15,
     padding: 10,
     alignItems: 'center',
     shadowColor: '#000',

@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 11,
-        gap: '10%',
+        gap: '6%',
     },
     button: {
         borderRadius: 50,

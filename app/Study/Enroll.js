@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
 
     //Card styles
     planContainer: {
-        height: 'auto',
+        height: '100%',
         marginTop: 15,
         alignItems: 'center',
         marginLeft: -20,
@@ -303,7 +303,6 @@ const styles = StyleSheet.create({
         paddingTop: 15,
         paddingBottom: 10,
         backgroundColor: 'rgba(243, 243, 243, 1)',
-        height: 330,
         borderRadius: 15,
     },
     Font: {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import useSessionData from '../../useSessionData';
 
 const BookList = () => {
@@ -53,16 +53,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 14,
   },
+  // bookContainer: {
+  //   flexDirection: 'column',
+  //   flexWrap: 'wrap',
+  //   justifyContent: 'space-around',
+  //   alignItems: 'center',
+  //   marginLeft: -10,
+  //   height: '15rem',
+  //   display: 'grid',
+  // },
   bookContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    flexDirection: 'row', // Change to 'row' to stack horizontally
     alignItems: 'center',
-    marginLeft: -30,
-    display: 'grid',
+    justifyContent: 'space-evenly',
+    flexWrap: 'wrap',
+    width: 'auto',
   },
   bookCard: {
-    width: '27.5%',
+    // width: '27.5%',
     height: 'auto',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,

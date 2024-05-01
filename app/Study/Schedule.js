@@ -249,7 +249,6 @@ const styles = StyleSheet.create({
   },
   classContainer: {
     width: 326,
-    height: 120,
     backgroundColor: 'rgb(249, 246, 246)',
     marginTop: 10,
     marginLeft: 20,

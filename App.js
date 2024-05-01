@@ -94,6 +94,9 @@ export default function App() {
 
         <Stack.Screen name='Dorm Booking' component={DormBooking} />
         <Stack.Screen name='Dorm Info' component={DormInfo} />
+        
+        <Stack.Screen name='Sign Up' component={SignUp} />
+        <Stack.Screen name='Log in' component={Login} />
 
       </Stack.Navigator>
     </NavigationContainer>
