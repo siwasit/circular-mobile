@@ -1,181 +1,159 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import useSessionData from '../../useSessionData';
+
+const Header = () => {
+  return (
+    <View style={styles.header}>
+      <Text style={styles.titleText}>CLASS</Text>
+      <Text style={styles.dateText}>Semester 2/2566</Text>
+    </View>
+  );
+};
+
+const CourseBox = ({ course }) => {
+  const { Subject_code, Subject_name, section } = course;
+
+  return (
+    <View style={styles.box}>
+      <View style={styles.topBox} />
+      <View style={styles.mainBox}>
+        <Text style={styles.courseName}>{Subject_code}</Text>
+        <Text style={styles.courseTitle}>{Subject_name}</Text>
+        <Text style={styles.courseSection}>{section}</Text>
+      </View>
+    </View>
+  );
+};
 
 const Class = () => {
+
+  const { sessionId, user } = useSessionData();
+  const studentId = user['studentId'].toString();
+  const [courses, setSubject] = useState([]);
+
+  useEffect(() => {
+    subjectFetchData();
+  }, [studentId]);
+
+  const subjectFetchData = async () => {
+    try {
+      const subjectResponse = await fetch(`http://localhost:3000/education/getEnroll/${studentId}`);
+
+      if (!subjectResponse.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const subjectResponseData = await subjectResponse.json();
+      console.log('Fetched data success:', subjectResponseData);
+      setSubject(subjectResponseData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  // return (
+  //   <View style={styles.container}>
+  //     <ScrollView style={styles.scrollContainer}>
+  //       <View style={styles.header}>
+  //         <View style={styles.header1}>
+  //           <Text style={styles.Day}>2 MAY 2024</Text>
+  //           <Text style={styles.Main}>CLASS</Text>
+  //         </View>
+  //         <View style={styles.header2}>
+  //           <Text style={styles.Font}>Spring 2024</Text>
+  //         </View>
+  //       </View>
+  //       <View style={styles.conatiner}>
+  //         <View>
+  //           {subjects !== null && (
+  //             subjects.map((subject) => (
+  //               <View key={subject['Subject_code']} style={styles.box}>
+  //                 <View style={styles.topbox} />
+  //                 <View style={styles.mainbox}>
+  //                   <Text style={styles.course}>{subject['Subject_code']}</Text>
+  //                   <Text style={styles.courseName}>{subject['Subject_name']}</Text>
+  //                   <Text style={styles.courseSection}>{subject['section']}</Text>
+  //                 </View>
+  //               </View>
+  //             ))
+  //           )}
+  //         </View>
+  //       </View>
+  //     </ScrollView>
+  //   </View>
+  // );
+
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.scrollContainer}>
-        <View style={styles.header}>
-          <View style={styles.header1}>
-            <Text style={styles.Day}>2 MAY 2024</Text>
-            <Text style={styles.Main}>CLASS</Text>
-          </View>
-          <View style={styles.header2}>
-            <Text style={styles.Font}>2/2023</Text>
-          </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          {courses.map((course, index) => (
+            <CourseBox key={index} course={course} />
+          ))}
         </View>
-        <View style={styles.conatiner}>
-          <View style={styles.box}>
-            <View style={styles.topbox} />
-            <View style={styles.mainbox}>
-              <Text style={styles.course}>CN311</Text>
-              <Text style={styles.courseName}>OPERATING SYSEMS</Text>
-              <Text style={styles.courseSection}>SECTION 760001</Text>
-            </View>
-          </View>
-          <View style={styles.box}>
-            <View style={styles.topbox}></View>
-            <View style={styles.mainbox}>
-              <Text style={styles.course}>CN321</Text>
-              <Text style={styles.courseName}>DATA COMMUN ..</Text>
-              <Text style={styles.courseSection}>SECTION 760001</Text>
-            </View>
-          </View>
-          <View style={styles.box}>
-            <View style={styles.topbox}></View>
-            <View style={styles.mainbox}>
-              <Text style={styles.course}>JP171</Text>
-              <Text style={styles.courseName}>JAPANESE FOR BEGI ..</Text>
-              <Text style={styles.courseSection}>SECTION 760001</Text>
-            </View>
-          </View>
-          <View style={styles.box}>
-            <View style={styles.topbox}></View>
-            <View style={styles.mainbox}>
-              <Text style={styles.course}>SF221</Text>
-              <Text style={styles.courseName}>SOFTWARE PORCESS</Text>
-              <Text style={styles.courseSection}>SECTION 760001</Text>
-            </View>
-          </View>
-          <View style={styles.box}>
-            <View style={styles.topbox}></View>
-            <View style={styles.mainbox}>
-              <Text style={styles.course}>SF222</Text>
-              <Text style={styles.courseName}>SOFTWARE ENGINEER...</Text>
-              <Text style={styles.courseSection}>SECTION 760001</Text>
-            </View>
-          </View>
-          <View style={styles.box}>
-            <View style={styles.topbox}></View>
-            <View style={styles.mainbox}>
-              <Text style={styles.course}>S231</Text>
-              <Text style={styles.courseName}>DATA STRUCTURES</Text>
-              <Text style={styles.courseSection}>SECTION 760001</Text>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'white',
-    width: 'auto',
+      flex: 1,
   },
-  scrollContainer: {
-    width: '100%',
+  content: {
+      padding: 20,
+      flex: 1,
   },
   header: {
-    flexDirection: 'row',
-    width: '100%',
-    height: 147,
-    backgroundColor: 'white',
-    top: 0,
-    marginBottom: 130,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: 15,
+      backgroundColor: 'white',
   },
-  header1: {
-    marginLeft: 20,
-    marginTop: 80,
+  dateText: {
+      fontSize: 18,
   },
-  Day: {
-    fontSize: 15,
-    fontFamily: 'Roboto',
-    fontWeight: '400',
-  },
-  Main: {
-    fontSize: 35,
-    fontFamily: 'Outfit',
-    fontWeight: '900',
-  },
-  header2: {
-    position: 'relative',
-    borderRadius: 50,
-    marginLeft: 200,
-    marginTop: 123,
-  },
-  Font: {
-    position: 'absolute',
-    bottom: '21%',
-    right: '50%',
-    backgroundColor: 'rgb(217, 217, 217)',
-    padding: 5,
-    borderRadius: 50,
-    fontSize: 23,
-    textAlign: 'center',
-  },
-  conatiner: {
-    display: 'grid',
-    gap: 30,
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    padding: 10,
-    width: 'auto',
+  titleText: {
+      fontSize: 24,
+      fontWeight: 'bold',
   },
   box: {
-    justifyContent: 'center',
-    width: 165,
-    height: 200,
-    borderRadius: 20,
-    backgroundColor: '#FAFAFA',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    borderWidth: 5,
+      backgroundColor: '#FAFAFA',
+      borderRadius: 20,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.2,
+      shadowRadius: 1,
+      elevation: 2,
+      margin: 10,
+      padding: 10,
   },
-  topbox: {
-    height: 20,
-    width: '100%',
-    backgroundColor: 'rgb(39, 39, 39)',
-    overflow: 'hidden',
+  topBox: {
+      height: 20,
+      backgroundColor: '#333',
+      borderRadius: 10,
   },
-  mainbox: {
-    marginTop: 5,
-    marginLeft: 15,
-    paddingLeft: '4%',
-  },
-  course: {
-    fontFamily: 'Homenaje',
-    fontWeight: '400',
-    fontSize: 30,
-    color: '#070F2B',
+  mainBox: {
+      marginTop: 10,
   },
   courseName: {
-    fontFamily: 'Homenaje',
-    fontWeight: '500',
-    fontSize: 25,
+      fontSize: 40,
+  },
+  courseTitle: {
+      fontSize: 35,
   },
   courseSection: {
-    fontFamily: 'Homenaje',
-    fontWeight: '400',
-    fontSize: 15,
+      fontSize: 20,
   },
-  Bardown: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%',
-    height: 100,
-    backgroundColor: 'rgb(244, 244, 244)',
-    position: 'absolute',
-    bottom: 0,
+  tabBar: {
+      height: 50,
+      backgroundColor: '#f4f4f4',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center',
   },
 });
 

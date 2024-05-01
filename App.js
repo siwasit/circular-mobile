@@ -4,8 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
+import Login from './app/User/Login.js';
+import SignUp from './app/User/SignUp.js';
 import ProfileScreen from './app/Profiles/ProfileScreen';
-import Classroom from './app/Class/Classroom.js';
+import Class from './app/Class/Class.js';
 
 import EnrollCard from './app/Card/EnrollCard';
 import HealthCard from './app/Card/HealthCard';
@@ -31,18 +33,18 @@ import BookTracking from './app/Books/BookTracking.js'
 import ComplainForm from './app/Complain/ComplainForm.js'
 import ComplainStatus from './app/Complain/ComplainStatus.js'
 
-import RoomBooking from './app/Reserve/RoomBooking.js'
-import ExerciseBooking from './app/Reserve/ExerciseBooking.js';
+import Booking from './app/Reserve/Booking.js'
 import EntBooking from './app/Reserve/EntBooking.js'
-import Booking from './app/Reserve/Booking.js';
+import ExerciseBooking from './app/Reserve/ExerciseBooking.js'
+import RoomBooking from './app/Reserve/RoomBooking.js'
 
-import PublicBus from './app/Transportation/PublicBus.js';
-import CampusBus from './app/Transportation/CampusBus.js';
+import PublicBus from './app/Transportation/PublicBus.js'
+import CampusBus from './app/Transportation/CampusBus.js'
 
-import DormBooking from './app/Dorm/DormBooking.js';
-import DormInfo from './app/Dorm/DormInfo.js';
-import Login from './app/User/Login.js';
-import SignUp from './app/User/SignUp.js';
+import DormInfo from './app/Dorm/DormInfo.js'
+import DormBooking from './app/Dorm/DormBooking.js'
+
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //Screen names
 const homeName = "Home";
@@ -56,6 +58,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name='Login' component={SignUp}/> 
+        <Stack.Screen name='SuccessLogin' component={Login}/> 
         <Stack.Screen name='Home' component={HomeTab}/>
         <Stack.Screen name='Enroll Card' component={EnrollCard} />
         <Stack.Screen name='Health Card' component={HealthCard} />
@@ -77,25 +81,23 @@ export default function App() {
         <Stack.Screen name='My Booking' component={MyBooking} />
         <Stack.Screen name='Book Tracking' component={BookTracking} />
 
+        <Stack.Screen name='Room Booking' component={RoomBooking} />
+        <Stack.Screen name='Entertainment' component={EntBooking} />
+        <Stack.Screen name='Exercise' component={ExerciseBooking} />
+        <Stack.Screen name='Booking' component={Booking} />
+
         <Stack.Screen name='Complain Form' component={ComplainForm} />
         <Stack.Screen name='Complain Status' component={ComplainStatus} />
 
         <Stack.Screen name='Public Bus' component={PublicBus} />
         <Stack.Screen name='Campus Bus' component={CampusBus} />
 
-        <Stack.Screen name='Room Booking' component={RoomBooking} />
-        <Stack.Screen name='Entertainment' component={EntBooking} />
-        <Stack.Screen name='Exercise' component={ExerciseBooking} />
-        <Stack.Screen name='Booking' component={Booking} />
-
         <Stack.Screen name='Dorm Booking' component={DormBooking} />
         <Stack.Screen name='Dorm Info' component={DormInfo} />
 
-        <Stack.Screen name='Sign Up' component={SignUp} />
-        <Stack.Screen name='Log in' component={Login} />
-
       </Stack.Navigator>
     </NavigationContainer>
+    // <ProfileScreen />
   );
 }
 
@@ -128,9 +130,10 @@ function HomeTab({ navigation }) {
       }}>
 
       <Tab.Screen name={homeName}>
-        {() => <HomeCard navigation={navigation} />}
+        {() => <HomeCard navigation={navigation} />} 
+        {/* //here */}
       </Tab.Screen>
-      <Tab.Screen name={className} component={Classroom} />
+      <Tab.Screen name={className} component={Class} />
       <Tab.Screen name={profilesName} component={ProfileScreen} />
 
     </Tab.Navigator>

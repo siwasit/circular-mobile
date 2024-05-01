@@ -1,51 +1,108 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import useSessionData from '../../useSessionData';
 
-const Booking = ({ room, location, startDate, endDate, user }) => (
-  <View style={styles.container}>
-    <View style={styles.header}>
-      <Text style={[styles.font, styles.mainText]}>My Booking🎸</Text>
-      <Text style={[styles.font, styles.miniText]}>จองห้อง</Text>
-    </View>
-    <View style={styles.card}>
-      <View style={styles.confirm}>
-        <Text style={styles.confirmText}>Open Confirm in 15:30 - 16:15</Text>
-      </View>
-      <View style={styles.top}>
-        <Image source={require('../img/Co-Learing.jpeg')} style={styles.image} />
-        <View style={styles.detail}>
-          <Text style={styles.room}>{room}</Text>
-          <Text style={styles.at}>{location}</Text>
-        </View>
-      </View>
-      <View style={styles.date}>
-        <View style={styles.tab}>
-          <Text style={styles.dateText}>Start Date</Text>
-          <Text style={[styles.time, styles.startTime]}>{startDate}</Text>
-        </View>
-        <View style={styles.tab}>
-          <Text style={styles.dateText}>Due Date</Text>
-          <Text style={[styles.time, styles.endTime]}>{endDate}</Text>
-        </View>
-      </View>
-      <Text style={styles.detailText}>Thammasat University Library offers group study rooms to all TU community members for study, work, and research. Individual and group study rooms.</Text>
-      <View style={styles.user}>
-        <View style={styles.tab}>
-          <Text style={styles.topText}>Terms of Service</Text>
-          <Text style={styles.userText}>View</Text>
-        </View>
-        <View style={styles.tab}>
-          <Text style={styles.topText}>User</Text>
-          <Text style={styles.userText}>{user}</Text>
-        </View>
-      </View>
-      <TouchableOpacity style={styles.cancelButton}>
-        <Text style={styles.cancelText}>CANCEL</Text>
-      </TouchableOpacity>
-    </View>
-  </View>
+const Booking = ({ navigation }) => {
 
-);
+  const { sessionId, user } = useSessionData();
+  const [bookroooms, setBookroooms] = useState([]);
+  const studentId = user['studentId'].toString();
+
+  useEffect(() => {
+    bookrooomsFetchData();
+  }, [studentId]);
+
+  const bookrooomsFetchData = async () => {
+    try {
+      const bookrooomsResponse = await fetch(`http://localhost:3000/room-booking/roomBooking/${studentId}`);
+
+      if (!bookrooomsResponse.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const bookrooomsResponseData = await bookrooomsResponse.json();
+      console.log('Fetched data success:', bookrooomsResponseData);
+      setBookroooms(bookrooomsResponseData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const onDelete = async (roomBookingID) => {
+    try {
+      const response = await fetch(`http://localhost:3000/room-booking/cancelRoomBooking/${roomBookingID}`, {
+        method: 'DELETE',
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const data = await response.json();
+      console.log('Data deleted successfully:', data.message);
+      // Optionally, you can perform additional actions after deletion
+      navigation.navigate('Reserve Card')
+    } catch (error) {
+      console.error('Error deleting data:', error);
+      // Handle error
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={[styles.font, styles.mainText]}>My Booking🎸</Text>
+        <Text style={[styles.font, styles.miniText]}>จองห้อง</Text>
+      </View>
+      <ScrollView>
+        {bookroooms.map((roomDetail, index) => {
+          const [startTime, endTime] = roomDetail['duration'].split(' - ');
+
+          return (
+            <View style={styles.card} key={index}>
+              {/* Add key prop to the parent View */}
+              <View style={styles.confirm}>
+                <Text style={styles.confirmText}>Open Confirm</Text>
+              </View>
+              <View style={styles.top}>
+                <Image source={require('../img/Co-Learing.jpeg')} style={styles.image} />
+                <View style={styles.detail}>
+                  <Text style={styles.room}>{roomDetail['name']}</Text> {/* Use roomDetail.room instead of room */}
+                  <Text style={styles.at}>{roomDetail['location']}</Text> {/* Use roomDetail.location instead of location */}
+                </View>
+              </View>
+              <View style={styles.date}>
+                <View style={styles.tab}>
+                  <Text style={styles.dateText}>Start Time</Text>
+                  <Text style={[styles.time, styles.startTime]}>{startTime}</Text> {/* Use roomDetail.startDate instead of startDate */}
+                </View>
+                <View style={styles.tab}>
+                  <Text style={styles.dateText}>Due Time</Text>
+                  <Text style={[styles.time, styles.endTime]}>{endTime}</Text> {/* Use roomDetail.endDate instead of endDate */}
+                </View>
+              </View>
+              <Text style={styles.detailText}>Thammasat University Library offers group study rooms to all TU community members for study, work, and research. Individual and group study rooms.</Text>
+              <View style={styles.user}>
+                <View style={styles.tab}>
+                  <Text style={styles.topText}>Terms of Service</Text>
+                  <Text style={styles.userText}>View</Text>
+                </View>
+                <View style={styles.tab}>
+                  <Text style={styles.topText}>User</Text>
+                  <Text style={styles.userText}>{roomDetail['eng_name']}</Text> {/* Use roomDetail.user instead of user */}
+                </View>
+              </View>
+              <TouchableOpacity style={styles.cancelButton} onPress={() => onDelete(roomDetail['RBooking_id'])}>
+                <Text style={styles.cancelText}>CANCEL</Text>
+              </TouchableOpacity>
+            </View>
+          )
+        })}
+      </ScrollView>
+    </View>
+
+  )
+};
 
 const styles = StyleSheet.create({
   container: {

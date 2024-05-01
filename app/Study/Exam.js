@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
+import useSessionData from '../../useSessionData';
 
 const Exam = ({ navigation }) => {
   const [btnPosition, setBtnPosition] = useState('Chosen');
@@ -15,6 +16,30 @@ const Exam = ({ navigation }) => {
 
   const closeModal = () => {
     setModalVisible(false);
+  };
+
+  const { sessionId, user } = useSessionData();
+  const studentId = user['studentId'].toString();
+  const [subjects, setSubject] = useState([]);
+
+  useEffect(() => {
+    subjectFetchData();
+  }, [studentId]);
+
+  const subjectFetchData = async () => {
+    try {
+      const subjectResponse = await fetch(`http://localhost:3000/education/getEnroll/${studentId}`);
+
+      if (!subjectResponse.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const subjectResponseData = await subjectResponse.json();
+      console.log('Fetched data success:', subjectResponseData);
+      setSubject(subjectResponseData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   return (
@@ -39,14 +64,16 @@ const Exam = ({ navigation }) => {
                   <Text style={styles.detailText}>ตารางสอบ🔥</Text>
                 </View>
                 <View style={styles.profileGrid}>
-                  <Image source={{ uri: '<path-to-image>' }} style={styles.profileImage} />
+                  <Image source={require('../img/person.jpg')} style={styles.profileImage} />
                   <View style={styles.profileInfo}>
-                    <Text style={styles.profileText}>6510742072</Text>
-                    <Text style={styles.profileTextName}>Nutpraphut Praphutsirikul</Text>
+                    <Text style={styles.profileText}>{user['studentId']}</Text>
+                    <Text style={styles.profileTextName}>{user['userName']}</Text>
                   </View>
                 </View>
                 <View style={styles.lastModifyDiv}>
-                  <Text style={styles.lastModifyText}>อัพเดทล่าสุด: ปปปป/ดด/วว ชช:นน</Text>
+                  {subjects !== null && subjects.length > 0 && (
+                    <Text style={styles.lastModifyText}>อัพเดทล่าสุด {subjects[0]['timestamp']}</Text>
+                  )}
                 </View>
                 <View style={styles.selectContainer}>
                   <View style={styles.buttonContainer}>
@@ -62,21 +89,28 @@ const Exam = ({ navigation }) => {
                   <Image source={require('../img/calendar.png')} style={styles.calendarImage} />
                 </View>
                 <View style={styles.dayDiv}>
-                  <Text style={styles.dayText}>25 Sunday</Text>
+                  <Text style={styles.dayText}>Test Schedule</Text>
                 </View>
                 <View style={styles.classContainer}>
-                  <View style={styles.gridRow}>
-                    <View style={styles.timeContainer}>
-                      <Text style={styles.timeStartText}>12:00</Text>
-                      <Text style={styles.timeFinishText}>14:00</Text>
-                    </View>
-                    <View style={styles.borderLine}></View>
-                    <View style={styles.classDetail}>
-                      <Text style={styles.classTextName}>SF222 (760001)</Text>
-                      <Text style={styles.classTextSubject}>Software Engineering Models and Analysis</Text>
-                      <Text style={styles.classTextRoom}>Room not specified</Text>
-                    </View>
-                  </View>
+                  {subjects.map((subject, index) => {
+                    // Splitting start and end time inside the loop
+                    const [startTime, endTime] = subject['test_duration'].split(' ');
+
+                    return (
+                      <View key={index} style={styles.gridRow}>
+                        <View style={styles.timeContainer}>
+                          <Text style={styles.timeStartText}>{startTime}</Text>
+                          <Text style={styles.timeFinishText}>{endTime}</Text>
+                        </View>
+                        <View style={styles.borderLine}></View>
+                        <View style={styles.classDetail}>
+                          <Text style={styles.classTextName}>{subject['Subject_code']} ({subject['section']})</Text>
+                          <Text style={styles.classTextSubject}>{subject['Subject_name']}</Text>
+                          <Text style={styles.classTextRoom}>{subject['study_room'] || 'Room not specified'}</Text>
+                        </View>
+                      </View>
+                    );
+                  })}
                 </View>
               </View>
             </ScrollView>

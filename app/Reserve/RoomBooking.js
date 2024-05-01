@@ -1,44 +1,90 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
   Image,
   StyleSheet,
-  Button, 
-  ScrollView
+  Button,
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMarker, faTv, faLaptop, faWifi } from '@fortawesome/free-solid-svg-icons';
+import useSessionData from '../../useSessionData';
 
 const RoomBooking = () => {
   const [campus, setCampus] = useState('Rangsit');
-  const [location, setLocation] = useState('Puey Ungpakorn Libary');
 
-  const rooms = [
-    {
-      id: 1,
-      image: require('../img/dorm1.png'), 
-      name: 'Study Room 1',
-      campus: 'Rangsit Campus',
-      location: 'Puey Ungpakorn Libary',
-      floor: 'Fl.1',
-      features: [
-        { icon: faTv, text: 'TV (Standard)' },
-        { icon: faMarker, text: 'Marker (Libary of things)' },
-        { icon: faLaptop, text: 'HDMI (Libary of things)' },
-        { icon: faWifi, text: 'WIFI (Support)' },
-      ],
-      capacity: '6-16',
-      timeSlots: [
-        { time: '09:00 - 12:00', status: 'OPEN' },
-        { time: '12:00 - 15:00', status: 'NOT' },
-        { time: '15:00 - 18:00', status: 'NOT' },
-        { time: '18:00 - 21:00', status: 'NOT' },
-        { time: 'CLOSED', status: 'CLOSED' },
-      ],
-    },
-    // Add more room data here
+  const { sessionId, user } = useSessionData();
+  const [rooms, setRooms] = useState([]);
+  const studentId = user['studentId'].toString();
+
+  useEffect(() => {
+    roomsFetchData();
+  }, [studentId]);
+
+  const onSubmit = (time, room_id) => {
+    // Send a POST request to the backend
+    fetch('http://localhost:3000/room-booking/bookRoom/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        student_id: user['studentId'],
+        room_id: room_id,
+        duration: time
+      })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        // Parse JSON response
+        return response.json();
+      })
+      .then(data => {
+        // Handle successful response
+        console.log('Response data:', data);
+        // You can perform additional actions here, such as showing a success message or navigating to another screen
+      })
+      .catch(error => {
+        // Handle fetch operation error
+        console.error('There was a problem with the fetch operation:', error);
+        // You can display an error message to the user or perform other error handling actions
+      });
+  };
+
+  const roomsFetchData = async () => {
+    try {
+      const roomsResponse = await fetch(`http://localhost:3000/room-booking/vacentRoom`);
+
+      if (!roomsResponse.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const roomsResponseData = await roomsResponse.json();
+      console.log('Fetched data success:', roomsResponseData);
+      setRooms(roomsResponseData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const features = [
+    { icon: faTv, text: 'TV (Standard)' },
+    { icon: faMarker, text: 'Marker (Library of things)' },
+    { icon: faLaptop, text: 'HDMI (Library of things)' },
+    { icon: faWifi, text: 'WIFI (Support)' }
   ];
+
+  const timeSlots = [
+    { time: '09:00 - 12:00', status: 'OPEN' },
+    { time: '12:00 - 15:00', status: 'OPEN' },
+    { time: '15:00 - 18:00', status: 'OPEN' },
+    { time: '18:00 - 21:00', status: 'OPEN' },
+    { time: 'OPEN', status: 'OPEN' },
+  ]
 
   const handleCampusChange = (newCampus) => setCampus(newCampus);
   const handleLocationChange = (newLocation) => setLocation(newLocation);
@@ -53,8 +99,8 @@ const RoomBooking = () => {
 
         <View style={styles.nav}>
           <View style={styles.navCampus}>
-            <Button title="Rangsit Campus" onPress={() => handleCampusChange('Rangsit')} style={styles.navCard}/>
-            <Button title="Tha Prahanm Campus" onPress={() => handleCampusChange('Tha Prahanm')} style={styles.navCard} />
+            <Button title="Rangsit Campus" onPress={() => handleCampusChange('Rangsit')} style={styles.navCard} />
+            <Button title="Tha Prahanm Campus" onPress={() => handleCampusChange('Tha Prachan')} style={styles.navCard} />
             <Button title="Lampang Campus" onPress={() => handleCampusChange('Lampang')} style={styles.navCard} />
           </View>
           <View style={styles.navLocation}>
@@ -65,44 +111,46 @@ const RoomBooking = () => {
 
         <View style={styles.main}>
           <ScrollView style={styles.cardWrapper}>
-            {rooms.map((room) => (
-              <View key={room.id} style={styles.card}>
+            {rooms.map((room, index) => (
+              <View key={index} style={styles.card}>
                 <View style={styles.cardTop}>
-                  <Image source={room.image} style={styles.cardImage} />
+                  <Image source={require('../img/dorm1.png')} style={styles.cardImage} />
                   <View style={styles.cardContent}>
-                    <Text style={styles.cardName}>{room.name}</Text>
+                    <Text style={styles.cardName}>{room['name']}</Text>
                     <View style={styles.cardDetails}>
                       <View style={styles.cardDetail}>
                         <FontAwesomeIcon icon={faMarker} style={styles.cardDetailIcon} />
-                        <Text style={styles.cardDetailText}>{room.campus}</Text>
+                        <Text style={styles.cardDetailText}>{room['campus']}</Text>
                       </View>
                       <View style={styles.cardDetail}>
                         <FontAwesomeIcon icon={faTv} style={styles.cardDetailIcon} />
-                        <Text style={styles.cardDetailText}>{room.location}</Text>
+                        <Text style={styles.cardDetailText}>{room['location']}</Text>
                       </View>
                       <View style={styles.cardDetail}>
                         <FontAwesomeIcon icon={faWifi} style={styles.cardDetailIcon} />
-                        <Text style={styles.cardDetailText}>{room.floor}</Text>
+                        <Text style={styles.cardDetailText}>{room['floor']}</Text>
                       </View>
                     </View>
                   </View>
                 </View>
                 <View style={styles.cardBottom}>
                   <View style={styles.cardFeatures}>
-                    {room.features.map((feature) => (
-                      <View key={feature.text} style={styles.cardFeature}>
+                    {features.map((feature, index) => (
+                      <View key={index} style={styles.cardFeature}>
                         <FontAwesomeIcon icon={feature.icon} style={styles.cardFeatureIcon} />
                         <Text style={styles.cardFeatureText}>{feature.text}</Text>
                       </View>
                     ))}
                   </View>
                   <View style={styles.cardCapacity}>
-                    <Text style={styles.cardCapacityText}>Capacity: {room.capacity}</Text>
+                    <Text style={styles.cardCapacityText}>Capacity: {room['capacity']}</Text>
                   </View>
                   <View style={styles.cardTimeslots}>
-                    {room.timeSlots.map((slot) => (
-                      <View key={slot.time} style={styles.cardTimeslot}>
-                        <Text style={slot.status === 'OPEN' ? styles.cardTimeslotOpen : styles.cardTimeslotClosed}>{slot.time}</Text>
+                    {timeSlots.map((slot, index) => (
+                      <View key={index} style={styles.cardTimeslot}>
+                        <TouchableOpacity onPress={() => onSubmit(slot.time, room['Room_id'])}>
+                          <Text style={slot.status === 'OPEN' ? styles.cardTimeslotOpen : styles.cardTimeslotClosed}>{slot.time}</Text>
+                        </TouchableOpacity>
                       </View>
                     ))}
                   </View>
@@ -159,10 +207,10 @@ const styles = StyleSheet.create({
   navCard: {
     borderRadius: 20,
     width: 40,
-    
+
   },
   navButtonActive: {
-    backgroundColor: '#ddd', 
+    backgroundColor: '#ddd',
   },
   main: {
     flex: 1,
@@ -251,8 +299,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   cardTimeslotOpen: {
-    backgroundColor: '#aae0ff', 
-    color: '#000', 
+    backgroundColor: '#aae0ff',
+    color: '#000',
     padding: 2,
     borderRadius: 20,
   },
@@ -265,16 +313,16 @@ const styles = StyleSheet.create({
   footer: {
     padding: 10,
     borderTopWidth: 1,
-    borderTopColor: '#ddd', 
+    borderTopColor: '#ddd',
     justifyContent: 'center',
     alignItems: 'center',
   },
   footerText: {
     fontSize: 12,
-    color: '#aaa', 
+    color: '#aaa',
   },
   navButtonInactive: {
-    backgroundColor: '#f5f5f5', 
+    backgroundColor: '#f5f5f5',
   },
 });
 

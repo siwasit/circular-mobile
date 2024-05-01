@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
+import useSessionData from '../../useSessionData';
 
 const Transcript = () => {
     const [btnPosition, setBtnPosition] = useState('Chosen');
@@ -17,12 +18,42 @@ const Transcript = () => {
         setModalVisible(false);
     };
 
+
+    const { sessionId, user } = useSessionData();
+    const studentId = user['studentId'].toString();
+    const [subjects, setSubjects] = useState([]);
+
+    useEffect(() => {
+        subjectFetchData();
+    }, [studentId]);
+
+    const subjectFetchData = () => {
+        fetch(`http://localhost:3000/education/transcript/${studentId}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((subjectResponseData) => {
+                console.log('Fetched data success:', subjectResponseData);
+                setSubjects((prevSubjects) => {
+                    // console.log('Previous subjects:', prevSubjects); // Log previous state
+                    return subjectResponseData; // Update state with new data
+                });
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    };
+
+
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.enrollContainer}>
                     <TouchableOpacity onPress={openModal}>
-                        <Text style={styles.openButton}>Transcipt</Text>
+                        <Text style={styles.openButton}>Transcript</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -39,14 +70,16 @@ const Transcript = () => {
                                     <Text style={styles.detailText}>ผลการเรียน</Text>
                                 </View>
                                 <View style={styles.profileGrid}>
-                                    <Image source={{ uri: '<path-to-image>' }} style={styles.profileImage} />
+                                    <Image source={require('../img/person.jpg')} style={styles.profileImage} />
                                     <View style={styles.profileInfo}>
-                                        <Text style={styles.profileText}>6510742072</Text>
-                                        <Text style={styles.profileTextName}>Nutpraphut Praphutsirikul</Text>
+                                        <Text style={styles.profileText}>{user['studentId']}</Text>
+                                        <Text style={styles.profileTextName}>{user['userName']}</Text>
                                     </View>
                                 </View>
                                 <View style={styles.lastModifyDiv}>
-                                    <Text style={styles.lastModifyText}>อัพเดทล่าสุด: ปปปป/ดด/วว ชช:นน</Text>
+                                    {subjects !== null && subjects.length > 0 && (
+                                        <Text style={styles.lastModifyText}>อัพเดทล่าสุด {subjects[0]['timestamp']}</Text>
+                                    )}
                                 </View>
                                 <View style={styles.selectContainer}>
                                     <View style={styles.buttonContainer}>
@@ -59,11 +92,14 @@ const Transcript = () => {
                                     </View>
                                 </View>
                                 <View style={styles.semDiv}>
-                                    <Text style={styles.semText}>Term 1 / 2566</Text>
+                                    {/* <Text style={styles.semText}>Term 1 / 2566</Text> */}
+                                    {subjects !== null && subjects.length > 0 && (
+                                        <Text style={styles.semText}>Semester: {subjects[0]['timestamp']}</Text>
+                                    )}
                                 </View>
                                 <View style={styles.planContainer}>
                                     <View style={styles.card}>
-                                        <View style={styles.firstContentCard}>
+                                        {/* <View style={styles.firstContentCard}>
                                             <View style={styles.content1}>
                                                 <Text style={styles.kit1}>CN101</Text>
                                                 <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
@@ -90,7 +126,17 @@ const Transcript = () => {
                                                 <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
                                             </View>
                                             <Text style={styles.kit3}>DATA COMMUNICATION AND COMPUTER NETWORK 1</Text>
-                                        </View>
+                                        </View> */}
+                                        {subjects !== null && subjects.map((each, index) => (
+                                            <View key={index} style={[styles.contentCard, index === 0 ? styles.firstContentCard : null]}>
+                                                <View style={styles.content1}>
+                                                    <Text style={styles.kit1}>{each['Subject_code']}</Text>
+                                                    <Text style={styles.kit2}>{each['credit']}หน่วยกิต ({each['credit']} หน่วยกิต ลงทะเบียน)</Text>
+                                                </View>
+                                                <Text style={styles.kit3}>{each['Subject_name']}</Text>
+                                                <Text style={styles.kit3}>Grade: {each['grade']}</Text>
+                                            </View>
+                                        ))}
                                     </View>
                                 </View>
                             </View>

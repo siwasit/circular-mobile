@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
+import useSessionData from '../../useSessionData';
 
-const ComplainForm = () => {
+const ComplainForm = ({ navigation }) => {
     const [btnPosition, setBtnPosition] = useState('Chosen');
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -16,6 +17,43 @@ const ComplainForm = () => {
     const closeModal = () => {
         setModalVisible(false);
     };
+
+    const [complain, setComplain] = useState({ subject: '', description: '' }); //studentId, subject, description
+    const { sessionId, user } = useSessionData();
+
+    const onSubmit = () => {
+        // Send a POST request to the backend
+        fetch('http://localhost:3000/complain/add-complains/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                studentId: user['studentId'],
+                subject: complain.subject,
+                description: complain.description
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parse JSON response
+                return response.json();
+            })
+            .then(data => {
+                // Handle successful response
+                console.log('Response data:', data);
+                closeModal()
+                // You can perform additional actions here, such as showing a success message or navigating to another screen
+            })
+            .catch(error => {
+                // Handle fetch operation error
+                console.error('There was a problem with the fetch operation:', error);
+                // You can display an error message to the user or perform other error handling actions
+            });
+    };
+
 
     return (
         <View style={styles.container}>
@@ -39,26 +77,42 @@ const ComplainForm = () => {
                             <TouchableOpacity style={styles.buttonContainer}>
                                 <Text style={[styles.font, styles.complainForm]}>ฟอร์มรับเรื่อง</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.buttonContainer}>
+                            <TouchableOpacity 
+                                style={styles.buttonContainer} 
+                                onPress={() => { 
+                                    navigation.navigate('Complain Status')
+                                    closeModal()
+                                }}
+                            >
                                 <Text style={[styles.font, styles.complainStatus]}>สถานะการร้องเรียน</Text>
                             </TouchableOpacity>
                         </View>
 
                         <View style={styles.form}>
                             <View style={styles.topic}>
-                                <TextInput style={styles.input} placeholder="หัวข้อเรื่อง" />
-                                <TextInput style={styles.input} placeholder="แจ้งถึง" />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="หัวข้อเรื่อง"
+                                    value={complain.subject}
+                                    onChangeText={text => setComplain({ ...complain, subject: text })}
+                                />
+                                {/* <TextInput style={styles.input} placeholder="แจ้งถึง" /> */}
                             </View>
-                            <View style={styles.time}>
+                            {/* <View style={styles.time}>
                                 <TextInput style={styles.input} placeholder="วันที่เกิด" />
                                 <TextInput style={styles.input} placeholder="เวลาที่เกิด" />
-                            </View>
-                            <TextInput style={[styles.inputContent, styles.fontFrom]}
-                                multiline = { true } placeholder="แจ้งร้องเรียน" />
+                            </View> */}
+                            <TextInput
+                                style={[styles.input, styles.inputContent, styles.fontFrom]}
+                                multiline={true}
+                                placeholder="แจ้งร้องเรียน"
+                                value={complain.description}
+                                onChangeText={text => setComplain({ ...complain, description: text })}
+                            />
                         </View>
 
                         <View style={styles.submit}>
-                            <TouchableOpacity style={styles.submitButton}>
+                            <TouchableOpacity style={styles.submitButton} onPress={onSubmit}>
                                 <Text style={[styles.font, styles.submitText]}>ส่งเรื่อง</Text>
                             </TouchableOpacity>
                         </View>

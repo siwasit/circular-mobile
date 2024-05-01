@@ -1,7 +1,12 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useSessionData from '../../useSessionData';
 
-const Login = () => {
+const Login = ({ navigation }) => {
+
+    const { sessionId, user } = useSessionData();
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -17,8 +22,15 @@ const Login = () => {
             <View style={styles.main}>
                 <Text style={styles.title}>Welcome To,{'\n'}THAMMASAT UNIVERSITY</Text>
                 <View style={styles.userInfo}>
-                    <View style={styles.userImg}></View>
-                    <Text style={styles.userName}>Nutpraphut Praphutsirikul{'\n'}6510742072</Text>
+                    {/* <View style={styles.userImg}></View> */}
+                    <Image
+                        source={require('../img/person.jpg')} // Replace './path/to/your/image.jpg' with the actual path to your image
+                        style={styles.userImg}
+                    />
+                    <Text style={styles.userName}>Name: {user.userName}{'\n'}Student ID: {user.studentId}</Text>
+                    <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('Home')}>
+                        <Text style={styles.homeButtonText}>Homepage</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.imgBottom}>
                     <Image source={require('../img/Vector 59.png')} style={styles.image} />
@@ -94,8 +106,25 @@ const styles = StyleSheet.create({
     },
     imgBottom: {
         marginLeft: 220,
-        transform: [{translateY: -180}],
+        transform: [{ translateY: -180 }],
         height: '50%',
+    },
+    homeButton: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFE920',
+        borderRadius: 50,
+        width: 125,
+        height: 46,
+        marginTop: 10,
+        marginLeft: -15,
+    },
+    homeButtonText: {
+        fontWeight: 'bold',
+        fontSize: 15,
+        fontFamily: 'Poppins',
+        textAlign: 'center',
     },
 });
 

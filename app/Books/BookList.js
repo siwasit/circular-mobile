@@ -1,36 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import useSessionData from '../../useSessionData';
 
 const BookList = () => {
-  const books = [
-    {
-      id: 1,
-      title: 'คุณอาเรียโต๊ะข้างๆ พูดภาษารัสเซียหวานใส่ซะหัวใจจะวาย',
-      author: 'SunSunSun',
-      imageUrl: require('../img/books/tokidoki.png'),
-    },
-    {
-      id: 2,
-      title: "มุมมองนักอ่านพระเจ้า (1)",
-      author: 'Sing Shong',
-      imageUrl: require('../img/books/reader.jpg'),
-    },
-    {
-      id: 3,
-      title: '極楽街\nสุขาวดีสีเลือด',
-      author: 'Yuto Sano',
-      imageUrl: require('../img/books/gokurakugai.jpg'),
-    },
-  ];
+  const { sessionId, user } = useSessionData();
+  const [books, setBooks] = useState([]);
+  const studentId = user['studentId'].toString();
+
+  useEffect(() => {
+    booksFetchData();
+  }, [studentId]);
+
+  const booksFetchData = async () => {
+    try {
+      const booksResponse = await fetch(`http://localhost:3000/book-booking/book-list`);
+
+      if (!booksResponse.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const booksResponseData = await booksResponse.json();
+      console.log('Fetched data success:', booksResponseData);
+      setBooks(booksResponseData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.bookContainer}>
-        {books.map(books => (
-          <View key={books.id} style={styles.bookCard}>
-            <Image source={books.imageUrl} style={styles.bookImage} />
-            <Text style={styles.bookTitle}>{books.title}</Text>
-            <Text style={styles.bookAuthor}>{books.author}</Text>
+        {books.map((book, index) => (
+          <View key={index} style={styles.bookCard}>
+            <Image source={require('../img/books/defaultbook.png')} style={styles.bookImage} />
+            <Text style={styles.bookTitle}>{book['book_name']}</Text>
+            <Text style={styles.bookAuthor}>{book['author']}</Text>
           </View>
         ))}
       </View>

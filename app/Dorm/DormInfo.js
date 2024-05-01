@@ -2,7 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, StatusBar } from 'react-native';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import DormImage from './DormImage'
+import Carousel from 'react-native-snap-carousel';
+
+const images = [
+  require('./img/room/room1.png'),
+  require('./img/room/room2.png'),
+  require('./img/room/room3.png'),
+];
 
 const DormInfo = ({ navigation }) => {
   return (
@@ -26,8 +32,8 @@ const DormInfo = ({ navigation }) => {
 
         <View style={styles.content}>
           <View style={styles.dormCard}>
-            <Card imageSource={require('./img/dorm1.png')} title="Dormitory A" dormType="A" style={styles.cardStyle}/>
-            <Card imageSource={require('./img/puay.png')} title="Dormitory B" dormType="B" />
+            <Card imageSource={require('./img/dorm1.png')} title="Dormitory A" dormType="A" style={styles.cardStyle} />
+            <Card imageSource={require('./img/puay.png')} title="Dormitory B" dormType="B" style={styles.cardStyle} />
           </View>
         </View>
 
@@ -46,13 +52,21 @@ const DormInfo = ({ navigation }) => {
       </View>
 
       <View style={styles.submitContainer}>
-        <TouchableOpacity onPress={() => {}} style={styles.submitButton}>
+        <TouchableOpacity onPress={() => { }} style={styles.submitButton}>
           <Text>Book Now</Text>
         </TouchableOpacity>
       </View>
 
       {/* Image Sliders imported from DormImage*/}
-      <DormImage />
+      <View style={styles.imageSliderContainer}>
+        <Carousel
+          data={images}
+          renderItem={({ item, index }) => <View key={index}><Image source={item} style={styles.sliderImage} /></View>}
+          sliderWidth={600}
+          itemWidth={600}
+          itemHeight={390}
+        />
+      </View>
     </ScrollView>
   );
 };
@@ -141,7 +155,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: '13rem',
     height: 'auto',
     marginBottom: 10,
   },
@@ -177,7 +191,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 11,
-    marginTop: -18,
+    marginTop: '10rem',
     marginLeft: 35,
   },
   tickDetail: {
@@ -186,7 +200,7 @@ const styles = StyleSheet.create({
   notifContainer: {
     flex: 1,
     marginLeft: 35,
-    marginTop: 30,
+    marginTop: '-10rem',
   },
   notif: {
     fontSize: 16,
@@ -197,14 +211,49 @@ const styles = StyleSheet.create({
   },
   submitContainer: {
     marginLeft: 35,
-    marginTop: 20,
+    marginTop: '-7rem',
   },
   submitButton: {
     padding: 10,
     backgroundColor: '#a3b8ff',
     width: 94,
     textAlign: 'center',
-  }
+  },
+  imageSliderContainer: {
+    marginBottom: 20,
+    marginTop: 30,
+    alignItems: 'center',
+  },
+  sliderImage: {
+    width: '100%',
+    height: 200,
+  },
+  servicesText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    paddingBottom: 220,
+    marginLeft: -190,
+    paddingTop: 20,
+  },
+  updatesContainer: {
+    alignItems: 'center',
+    width: '100%',
+    flexDirection: 'row',
+  },
+  updatesTitle: {
+    fontSize: 18,
+    marginBottom: 5,
+  },
+  gridContainer: {
+    width: '80%',
+    backgroundColor: 'lightgray',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    display: 'grid',
+  },
 });
 
 export default DormInfo

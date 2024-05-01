@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native';
+import useSessionData from '../../useSessionData';
 
 const Enroll = ({ navigation }) => {
     const [btnPosition, setBtnPosition] = useState('Chosen');
@@ -15,6 +16,48 @@ const Enroll = ({ navigation }) => {
 
     const closeModal = () => {
         setModalVisible(false);
+    };
+
+    const { sessionId, user } = useSessionData();
+    const studentId = user['studentId'].toString();
+    const [subjects, setSubject] = useState([]);
+    const [creditData, setCreditData] = useState(null);
+
+    useEffect(() => {
+        subjectFetchData();
+        creditFetchData();
+    }, [studentId]);
+
+    const subjectFetchData = async () => {
+        try {
+            const subjectResponse = await fetch(`http://localhost:3000/education/getEnroll/${studentId}`);
+
+            if (!subjectResponse.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const subjectResponseData = await subjectResponse.json();
+            console.log('Fetched data success:', subjectResponseData);
+            setSubject(subjectResponseData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    const creditFetchData = async () => {
+        try {
+            const creditResponse = await fetch(`http://localhost:3000/education/credit/${studentId}`);
+
+            if (!creditResponse.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const creditResponseData = await creditResponse.json();
+            // console.log('Fetched data:', responseData);
+            setCreditData(creditResponseData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     };
 
     return (
@@ -39,14 +82,16 @@ const Enroll = ({ navigation }) => {
                                     <Text style={styles.detailText}>ลงทะเบียนเพิ่ม / ถอน</Text>
                                 </View>
                                 <View style={styles.profileGrid}>
-                                    <Image source={{ uri: '<path-to-image>' }} style={styles.profileImage} />
+                                    <Image source={require('../img/person.jpg')} style={styles.profileImage} />
                                     <View style={styles.profileInfo}>
-                                        <Text style={styles.profileText}>6510742072</Text>
-                                        <Text style={styles.profileTextName}>Nutpraphut Praphutsirikul</Text>
+                                        <Text style={styles.profileText}>{user['studentId']}</Text>
+                                        <Text style={styles.profileTextName}>{user['userName']}</Text>
                                     </View>
                                 </View>
                                 <View style={styles.lastModifyDiv}>
-                                    <Text style={styles.lastModifyText}>อัพเดทล่าสุด: ปปปป/ดด/วว ชช:นน</Text>
+                                    {subjects !== null && subjects.length > 0 && (
+                                        <Text style={styles.lastModifyText}>อัพเดทล่าสุด {subjects[0]['timestamp']}</Text>
+                                    )}
                                 </View>
                                 <View style={styles.selectContainer}>
                                     <View style={styles.buttonContainer}>
@@ -62,39 +107,22 @@ const Enroll = ({ navigation }) => {
                                     <View style={styles.card}>
                                         <View style={styles.content}>
                                             <Text style={styles.kit0}>Plan1</Text>
-                                            <Text style={styles.Font}>18 หน่วยกิต</Text>
+                                            {creditData !== null && (
+                                                <Text style={styles.Font}>{creditData['total_credits']} หน่วยกิต</Text>
+                                            )}
                                             <Text style={styles.Heart}>💛</Text>
                                         </View>
-                                        <View style={styles.firstContentCard}>
-                                            <View style={styles.content1}>
-                                                <Text style={styles.kit1}>CN101</Text>
-                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
+                                        {subjects !== null && subjects.map((subject, index) => (
+                                            <View key={index} style={[styles.contentCard, index === 0 ? styles.firstContentCard : null]}>
+                                                <View style={styles.content1}>
+                                                    <Text style={styles.kit1}>{subject['Subject_code']}</Text>
+                                                    <Text style={styles.kit2}>{subject['credit']}หน่วยกิต ({subject['credit']} หน่วยกิต ลงทะเบียน)</Text>
+                                                </View>
+                                                <Text style={styles.kit3}>{subject['Subject_name']}</Text>
                                             </View>
-                                            <Text style={styles.kit3}>Introduction to Computer Progamming 101</Text>
-                                        </View>
-                                        <View style={styles.contentCard}>
-                                            <View style={styles.content1}>
-                                                <Text style={styles.kit1}>JP171</Text>
-                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
-                                            </View>
-                                            <Text style={styles.kit3}>JAPANESE FOR BEGINNERS 1</Text>
-                                        </View>
-                                        <View style={styles.contentCard}>
-                                            <View style={styles.content1}>
-                                                <Text style={styles.kit1}>SF231</Text>
-                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
-                                            </View>
-                                            <Text style={styles.kit3}>DATA STRUTURES AND ALGORITHMS</Text>
-                                        </View>
-                                        <View style={styles.contentCard}>
-                                            <View style={styles.content1}>
-                                                <Text style={styles.kit1}>CN321</Text>
-                                                <Text style={styles.kit2}>3หน่วยกิต (3 หน่วยกิต ลงทะเบียน)</Text>
-                                            </View>
-                                            <Text style={styles.kit3}>DATA COMMUNICATION AND COMPUTER NETWORK 1</Text>
-                                        </View>
+                                        ))}
                                     </View>
-                                    <View style={styles.card}>
+                                    {/* <View style={styles.card}>
                                         <View style={styles.content}>
                                             <Text style={styles.kit0}>Plan2</Text>
                                             <Text style={styles.Font}>12 หน่วยกิต</Text>
@@ -128,7 +156,7 @@ const Enroll = ({ navigation }) => {
                                             </View>
                                             <Text style={styles.kit3}>DATA COMMUNICATION AND COMPUTER NETWORK 1</Text>
                                         </View>
-                                    </View>
+                                    </View> */}
                                 </View>
                             </View>
                         </ScrollView>

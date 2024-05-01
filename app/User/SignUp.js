@@ -1,7 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp = ({ navigation }) => {
+
+    const [auth, setAuth] = useState({ citizenId: '', studentId: '' });
+    const [sessionId, setSessionId] = useState(null);
+
+    const onSubmit = () => {
+        // Send a POST request to the backend
+        fetch('http://localhost:3000/auth/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                citizenId: auth.citizenId,
+                studentId: auth.studentId
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parse JSON response
+                return response.json();
+            })
+            .then(data => {
+                // Check if login was successful
+                if (data.sessionID) {
+                    // Handle successful login
+                    console.log('Login successful');
+                    // console.log('Session ID:', data.sessionID);
+                    setSessionId(data.sessionID);
+                    AsyncStorage.setItem('sessionId', data.sessionID)
+                        .then(() => {
+                            // Store user data along with session ID
+                            AsyncStorage.setItem('userData', JSON.stringify(data.userData))
+                                .then(() => {
+                                    // Retrieve session ID and user data immediately after setting them
+                                    AsyncStorage.multiGet(['sessionId', 'userData'])
+                                        .then((values) => {
+                                            navigation.navigate('SuccessLogin');
+                                        })
+                                        .catch((error) => {
+                                            console.error('Error retrieving session ID and user data:', error);
+                                        });
+                                })
+                                .catch((error) => {
+                                    console.error('Error setting user data in AsyncStorage:', error);
+                                });
+                        })
+                        .catch((error) => {
+                            console.error('Error setting session ID in AsyncStorage:', error);
+                        });
+                } else {
+                    // Handle unsuccessful login
+                    console.log('Invalid student id or password');
+                }
+            })
+            .catch(error => {
+                // Handle fetch operation error
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -24,8 +87,12 @@ const SignUp = ({ navigation }) => {
                     <View style={styles.form}>
                         <TextInput
                             style={styles.input}
-                            placeholder="Email or username"
+                            placeholder="Student ID"
                             placeholderTextColor="#444"
+                            onChangeText={(stdId) => setAuth({ ...auth, studentId: stdId })}
+                            // returnKeyType="next"
+                            textContentType="username"
+                        // value={auth.studentId}
                         />
                         <Image source={require('../img/user.png')} style={styles.inputIcon} />
                         <TextInput
@@ -33,12 +100,16 @@ const SignUp = ({ navigation }) => {
                             placeholder="Password"
                             placeholderTextColor="#444"
                             secureTextEntry={true}
+                            onChangeText={(password) => setAuth({ ...auth, citizenId: password })}
+                            onSubmitEditing={onSubmit}
+                            // returnKeyType="done"
+                            value={auth.citizenId}
                         />
                         <Image source={require('../img/password.png')} style={styles.passwordIcon} />
                         <TouchableOpacity>
                             <Text style={styles.forgotPassword}>Forgot password?</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Log in')}>
+                        <TouchableOpacity style={styles.loginButton} onPress={() => onSubmit()}>
                             <Text style={styles.loginButtonText}>Login Now</Text>
                         </TouchableOpacity>
                     </View>

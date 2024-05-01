@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import useSessionData from '../../useSessionData';
 
 const Inform = ({ navigation }) => {
+
+    const { sessionId, user } = useSessionData();
+    const studentId = user['studentId'].toString();
+    const [status, setStatus] = useState([]);
+
+    useEffect(() => {
+        subjectFetchData();
+    }, [studentId]);
+
+    const subjectFetchData = async () => {
+        try {
+            const statusResponse = await fetch(`http://localhost:3000/complain/get-complains/${studentId}`);
+
+            if (!statusResponse.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const statusResponseData = await statusResponse.json();
+            console.log('Fetched data success:', statusResponseData);
+            setStatus(statusResponseData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
     return (
         <View style={styles.container}>
@@ -12,20 +37,12 @@ const Inform = ({ navigation }) => {
             <Text style={styles.miniText}>สถานะร้องเรียน</Text>
 
             <View style={styles.status}>
-                <View style={styles.card}>
-                    <Text style={styles.topic}>อาคารอำนวยการคณะวิศวะห้อง ว.ศ.511 ชำรุด</Text>
-                    <Text style={[styles.statusText, styles.inProcess]}>อยู่ระหว่างดำเนินการ</Text>
-                </View>
-
-                <View style={styles.card}>
-                    <Text style={styles.topic}>แอป giggy ไม่เสถียรอีกแล้ว</Text>
-                    <Text style={[styles.statusText, styles.waitingReceive]}>รอรับเรื่อง</Text>
-                </View>
-
-                <View style={styles.card}>
-                    <Text style={styles.topic}>แอป giggy ไม่เสถียร</Text>
-                    <Text style={[styles.statusText, styles.succeed]}>ดำเนินการสำเร็จ</Text>
-                </View>
+                {status.map((each, index) => (
+                    <View key={index} style={styles.card}>
+                        <Text style={styles.topic}>{each['subject']}</Text>
+                        <Text style={[styles.statusText, styles.inProcess]}>{each['status']}</Text>
+                    </View>
+                ))}
             </View>
         </View>
     );

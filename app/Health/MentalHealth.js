@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Modal, StyleSheet } from 'react-native';
+import AppointmentScheduler from './AppointmentScheduler';
+import useSessionData from '../../useSessionData';
 
 const MentalHealth = () => {
     const [btnPosition, setBtnPosition] = useState('Chosen');
@@ -16,6 +18,43 @@ const MentalHealth = () => {
     const closeModal = () => {
         setModalVisible(false);
     };
+
+    const [healthComplain, setHealthComplain] = useState({ appointmentDate: '2024-04-29', subject: '' });
+    const { sessionId, user } = useSessionData();
+
+    const onSubmit = () => {
+        // Send a POST request to the backend
+        fetch('http://localhost:3000/health/add-appointments/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                studentId: user['studentId'],
+                appointmentDate: healthComplain.appointmentDate,
+                subject: healthComplain.subject
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parse JSON response
+                return response.json();
+            })
+            .then(data => {
+                // Handle successful response
+                console.log('Response data:', data);
+                closeModal()
+                // You can perform additional actions here, such as showing a success message or navigating to another screen
+            })
+            .catch(error => {
+                // Handle fetch operation error
+                console.error('There was a problem with the fetch operation:', error);
+                // You can display an error message to the user or perform other error handling actions
+            });
+    };
+
 
     return (
         <View style={styles.container}>
@@ -51,10 +90,14 @@ const MentalHealth = () => {
                                 multiline={true}
                                 placeholder="แจ้งเหตุ...."
                                 placeholderTextColor="#9B9B9B"
+                                value={healthComplain.subject}
+                                onChangeText={text => setHealthComplain({ ...healthComplain, subject: text })}
                             />
 
+                            <AppointmentScheduler />
+
                             <View style={styles.submit}>
-                                <TouchableOpacity onPress={() => { }} style={styles.submitButton}>
+                                <TouchableOpacity onPress={onSubmit} style={styles.submitButton}>
                                     <Text style={styles.submitButtonText}>ส่งเรื่อง</Text>
                                 </TouchableOpacity>
                             </View>
@@ -151,6 +194,7 @@ const styles = StyleSheet.create({
         height: 26,
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 30,
     },
     submitButtonText: {
         fontSize: 13,
@@ -189,7 +233,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginTop: '50%',
         padding: 10,
-      },
+    },
 });
 
 export default MentalHealth;

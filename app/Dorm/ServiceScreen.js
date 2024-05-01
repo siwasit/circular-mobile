@@ -3,7 +3,6 @@ import { View, Text, Image, StyleSheet, Button, TouchableOpacity } from 'react-n
 import Carousel from 'react-native-snap-carousel'; 
 import SelectButton from './SelectButton';
 
-
 const IMAGES = [
   require('./img/dorm1.png'),
   require('./img/puay.png'),
@@ -11,7 +10,7 @@ const IMAGES = [
 ];
 
 const ServiceScreen = () => {
-  const [hasUpdates, setHasUpdates] = useState(true); 
+  const [hasUpdates, setHasUpdates] = useState(true);
 
   const handleViewAllPress = () => {
     console.log('View All pressed');
@@ -21,7 +20,7 @@ const ServiceScreen = () => {
     <View style={styles.imageSliderContainer}>
       <Carousel
         data={IMAGES}
-        renderItem={({ item }) => <Image source={item} style={styles.sliderImage} />}
+        renderItem={({ item, index }) => <View key={index}><Image source={item} style={styles.sliderImage} /></View>}
         sliderWidth={300}
         itemWidth={300}
       />
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
   },
   sliderImage: {
     width: '100%',
-    height: 200, 
+    height: 200,
   },
   servicesText: {
     fontSize: 20,
